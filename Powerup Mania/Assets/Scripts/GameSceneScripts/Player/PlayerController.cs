@@ -5,11 +5,17 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Camera _mainCamera;
+    [SerializeField] private GameObject _bulletPrefab;
+    [SerializeField] private Transform _shootPoint;
 
     private float _playerSpeed = 10f;
     private float _playerRotationSpeed = 5f;
     private float _horizontalInput;
     private float _verticalInput;
+
+    private float _shootForce = 5f;
+    private float _fireRate = 0.4f;
+    private float _fireTime;
 
     private void Start()
     {
@@ -20,6 +26,11 @@ public class PlayerController : MonoBehaviour
     {
         HandleMovement();
         HandleRotation();
+        if (Input.GetMouseButtonDown(0) && Time.time > _fireTime)
+        {
+            Shoot();
+            _fireTime = Time.time + _fireRate;
+        }
     }
 
     private void HandleMovement()
@@ -46,5 +57,20 @@ public class PlayerController : MonoBehaviour
         // Smoothly rotating towards the target
         Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _playerRotationSpeed * Time.deltaTime);
+    }
+
+    private void Shoot()
+    {
+        GameObject bullet = Instantiate(_bulletPrefab, _shootPoint.position, _shootPoint.rotation);
+
+        PlayerBullet bulletComponent = bullet.GetComponent<PlayerBullet>();
+        if (bulletComponent)
+        {
+            Rigidbody2D bulletRigidBody = bullet.GetComponent<Rigidbody2D>();
+            if (bulletRigidBody)
+            {
+                bulletRigidBody.velocity = _shootPoint.up * _shootForce;
+            }
+        }
     }
 }
