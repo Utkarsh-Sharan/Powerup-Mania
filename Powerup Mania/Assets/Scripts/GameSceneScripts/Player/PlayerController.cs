@@ -34,16 +34,16 @@ public class PlayerController : MonoBehaviour
 
     private void HandleRotation()
     {
-        // Get mouse position in world coordinates
+        // Getting mouse position in world coordinates
         Vector3 mousePosition = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition.z = 0; // Ensure z-axis is zero for 2D
+        mousePosition.z = 0; // z-axis to be 0 for 2D
 
-        // Calculate direction and target rotation
+        // Calculating direction and target rotation
         Vector3 direction = (mousePosition - transform.position).normalized;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         angle -= 90;
 
-        // Smoothly rotate towards the target rotation
+        // Smoothly rotating towards the target
         Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _playerRotationSpeed * Time.deltaTime);
     }
