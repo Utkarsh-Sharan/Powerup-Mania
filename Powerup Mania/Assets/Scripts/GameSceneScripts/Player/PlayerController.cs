@@ -13,7 +13,9 @@ public class PlayerController : MonoBehaviour
     private float _horizontalInput;
     private float _verticalInput;
 
-    private float _shootForce = 5f; // Force with which the bullet is shot
+    private float _shootForce = 5f;
+    private float _fireRate = 0.4f;
+    private float _fireTime;
 
     private void Start()
     {
@@ -24,9 +26,10 @@ public class PlayerController : MonoBehaviour
     {
         HandleMovement();
         HandleRotation();
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && Time.time > _fireTime)
         {
             Shoot();
+            _fireTime = Time.time + _fireRate;
         }
     }
 
