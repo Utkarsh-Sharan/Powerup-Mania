@@ -11,22 +11,24 @@ public class TimeRewindPowerup : MonoBehaviour
         if (other.GetComponent<PlayerController>())
         {
             // Trigger the rewind effect
-            StartCoroutine(RewindCoroutine());
+            //StartCoroutine(RewindCoroutine());
+            PowerupManager.IsTimeRewindActivated = true;
+
+            Destroy(this.gameObject);
         }
     }
 
-    private IEnumerator RewindCoroutine()
-    {
-        // Wait for a short moment to ensure all actions are processed
-        yield return new WaitForSeconds(0.1f);
+    //private IEnumerator RewindCoroutine()
+    //{
+    //    // Wait for a short moment to ensure all actions are processed
+    //    yield return new WaitForSeconds(0.1f);
         
-        // Rewind the game state
-        float startTime = Time.time;
-        while (Time.time - startTime < _rewindDuration)
-        {
-            TimeManager.Instance.RewindState();
-            yield return new WaitForSeconds(0.05f); // Adjust the delay as needed
-        }
-        Destroy(gameObject); // Destroy the power-up after use
-    }
+    //    // Rewind the game state
+    //    float startTime = Time.time;
+    //    while (Time.time - startTime < _rewindDuration)
+    //    {
+    //        TimeManager.Instance.RewindState();
+    //        yield return new WaitForSeconds(0.05f); // Adjust the delay as needed
+    //    }
+    //}
 }

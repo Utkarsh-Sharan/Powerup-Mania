@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     private float _fireRate = 0.4f;
     private float _fireTime;
 
+    private float _rewindDuration = 10f; // Duration in seconds to rewind
+
     private void Start()
     {
         transform.position = Vector3.zero;
@@ -26,10 +28,16 @@ public class PlayerController : MonoBehaviour
     {
         HandleMovement();
         HandleRotation();
+
         if (Input.GetMouseButtonDown(0) && Time.time > _fireTime)
         {
             Shoot();
             _fireTime = Time.time + _fireRate;
+        }
+
+        if(Input.GetKeyDown(KeyCode.T) && PowerupManager.IsTimeRewindActivated)
+        {
+            StartCoroutine(RewindCoroutine());
         }
     }
 
@@ -71,6 +79,20 @@ public class PlayerController : MonoBehaviour
             {
                 bulletRigidBody.velocity = _shootPoint.up * _shootForce;
             }
+        }
+    }
+
+    private IEnumerator RewindCoroutine()
+    {
+        // Wait for a short moment to ensure all actions are processed
+        yield return new WaitForSeconds(0.1f);
+
+        // Rewind the game state
+        float startTime = Time.time;
+        while (Time.time - startTime < _rewindDuration)
+        {
+            TimeManager.Instance.RewindState();
+            yield return new WaitForSeconds(0.1f); // Adjust the delay as needed
         }
     }
 }
