@@ -39,6 +39,11 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(RewindCoroutine());
         }
+
+        if (PowerupManager.IsMagnetPowerupActivated)
+        {
+            MoveTowardsSpikes();
+        }
     }
 
     private void HandleMovement()
@@ -93,6 +98,25 @@ public class PlayerController : MonoBehaviour
         {
             TimeManager.Instance.RewindState();
             yield return new WaitForSeconds(0.1f); // Adjust the delay as needed
+        }
+    }
+
+    private void MoveTowardsSpikes()
+    {
+        Spikes spikes = GetComponent<Spikes>();
+
+        if(spikes != null)
+        {
+            float distance = Vector2.Distance(spikes.spikeTransform.position, this.transform.position);
+
+            if (distance < 5f)
+            {
+                transform.position = Vector2.MoveTowards(transform.position, spikes.spikeTransform.position, 5 * Time.deltaTime);
+            }
+        }
+        else
+        {
+            Debug.LogError("Spikes not found");
         }
     }
 }

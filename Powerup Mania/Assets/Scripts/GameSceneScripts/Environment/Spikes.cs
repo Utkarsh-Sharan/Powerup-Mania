@@ -4,5 +4,10 @@ using UnityEngine;
 
 public class Spikes : MonoBehaviour
 {
-    
+    public Transform spikeTransform;
+
+    private void Start()
+    {
+        spikeTransform = this.transform;
+    }
 }
