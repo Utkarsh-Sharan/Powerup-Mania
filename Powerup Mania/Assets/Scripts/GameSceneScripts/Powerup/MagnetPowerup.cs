@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimeRewindPowerup : MonoBehaviour
+public class MagnetPowerup : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.GetComponent<PlayerController>())
         {
-            PowerupManager.IsTimeRewindActivated = true;
+            PowerupManager.IsMagnetPowerupActivated = true;
 
             Destroy(this.gameObject);
         }
