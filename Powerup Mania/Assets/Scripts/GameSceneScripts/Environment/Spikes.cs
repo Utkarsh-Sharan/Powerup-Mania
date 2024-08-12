@@ -4,10 +4,20 @@ using UnityEngine;
 
 public class Spikes : MonoBehaviour
 {
-    public Transform spikeTransform;
-
-    private void Start()
+    private void OnEnable()
     {
-        spikeTransform = this.transform;
+        if (SpikeManager.Instance != null)
+        {
+            SpikeManager.Instance.RegisterSpike(transform);
+        }
+        else
+        {
+            Debug.LogError("SpikeManager instance is null. Ensure that SpikeManager is present in the scene.");
+        }
+    }
+
+    private void OnDisable()
+    {
+        SpikeManager.Instance.UnregisterSpike(transform);
     }
 }

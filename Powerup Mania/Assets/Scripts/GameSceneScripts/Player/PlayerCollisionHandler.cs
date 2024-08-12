@@ -15,7 +15,7 @@ public class PlayerCollisionHandler : MonoBehaviour
         else if (other.GetComponent<MagnetPowerup>())
         {
             PowerupManager.IsMagnetPowerupActivated = true;
-
+            
             Destroy(other.gameObject);
         }
     }

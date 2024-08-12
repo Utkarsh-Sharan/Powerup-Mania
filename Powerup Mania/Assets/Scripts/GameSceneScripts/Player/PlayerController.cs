@@ -8,16 +8,23 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject _bulletPrefab;
     [SerializeField] private Transform _shootPoint;
 
+    //player movement and input
     private float _playerSpeed = 10f;
     private float _playerRotationSpeed = 5f;
     private float _horizontalInput;
     private float _verticalInput;
 
+    //player shoot
     private float _shootForce = 5f;
     private float _fireRate = 0.4f;
     private float _fireTime;
 
+    //time rewind powerup
     private float _rewindDuration = 10f; // Duration in seconds to rewind
+
+    //magnet powerup
+    private float _magnetRange = 5f;
+    private float _magnetSpeed = 0.1f;
 
     private void Start()
     {
@@ -103,20 +110,17 @@ public class PlayerController : MonoBehaviour
 
     private void MoveTowardsSpikes()
     {
-        Spikes spikes = GetComponent<Spikes>();
+        List<Transform> spikes = SpikeManager.Instance.GetSpikes();
 
-        if(spikes != null)
+        foreach (Transform spikeTransform in spikes)
         {
-            float distance = Vector2.Distance(spikes.spikeTransform.position, this.transform.position);
+            float distance = Vector2.Distance(spikeTransform.position, transform.position);
 
-            if (distance < 5f)
+            if (distance < _magnetRange)
             {
-                transform.position = Vector2.MoveTowards(transform.position, spikes.spikeTransform.position, 5 * Time.deltaTime);
+                transform.position = Vector2.MoveTowards(spikeTransform.position, transform.position, _magnetSpeed * Time.deltaTime);
+                break;
             }
-        }
-        else
-        {
-            Debug.LogError("Spikes not found");
         }
     }
 }
