@@ -8,14 +8,23 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject _bulletPrefab;
     [SerializeField] private Transform _shootPoint;
 
+    //player movement and input
     private float _playerSpeed = 10f;
     private float _playerRotationSpeed = 5f;
     private float _horizontalInput;
     private float _verticalInput;
 
+    //player shoot
     private float _shootForce = 5f;
     private float _fireRate = 0.4f;
     private float _fireTime;
+
+    //time rewind powerup
+    private float _rewindDuration = 10f; // Duration in seconds to rewind
+
+    //magnet powerup
+    private float _magnetRange = 5f;
+    private float _magnetSpeed = 0.1f;
 
     private void Start()
     {
@@ -26,10 +35,21 @@ public class PlayerController : MonoBehaviour
     {
         HandleMovement();
         HandleRotation();
+
         if (Input.GetMouseButtonDown(0) && Time.time > _fireTime)
         {
             Shoot();
             _fireTime = Time.time + _fireRate;
+        }
+
+        if(Input.GetKeyDown(KeyCode.T) && PowerupManager.IsTimeRewindActivated)
+        {
+            StartCoroutine(RewindCoroutine());
+        }
+
+        if (PowerupManager.IsMagnetPowerupActivated)
+        {
+            MoveTowardsSpikes();
         }
     }
 
@@ -70,6 +90,36 @@ public class PlayerController : MonoBehaviour
             if (bulletRigidBody)
             {
                 bulletRigidBody.velocity = _shootPoint.up * _shootForce;
+            }
+        }
+    }
+
+    private IEnumerator RewindCoroutine()
+    {
+        // Wait for a short moment to ensure all actions are processed
+        yield return new WaitForSeconds(0.1f);
+
+        // Rewind the game state
+        float startTime = Time.time;
+        while (Time.time - startTime < _rewindDuration)
+        {
+            TimeManager.Instance.RewindState();
+            yield return new WaitForSeconds(0.1f); // Adjust the delay as needed
+        }
+    }
+
+    private void MoveTowardsSpikes()
+    {
+        List<Transform> spikes = SpikeManager.Instance.GetSpikes();
+
+        foreach (Transform spikeTransform in spikes)
+        {
+            float distance = Vector2.Distance(spikeTransform.position, transform.position);
+
+            if (distance < _magnetRange)
+            {
+                transform.position = Vector2.MoveTowards(spikeTransform.position, transform.position, _magnetSpeed * Time.deltaTime);
+                break;
             }
         }
     }
