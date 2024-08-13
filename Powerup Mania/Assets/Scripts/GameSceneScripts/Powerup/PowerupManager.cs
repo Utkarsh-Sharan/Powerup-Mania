@@ -9,4 +9,7 @@ public class PowerupManager : MonoBehaviour
 
     private static bool _isMagnetPowerupActivated;
     public static bool IsMagnetPowerupActivated { get { return _isMagnetPowerupActivated; } set { _isMagnetPowerupActivated = value; } }
+
+    private static bool _isPortalPowerupActivated;
+    public static bool IsPortalPowerupActivated { get { return _isPortalPowerupActivated; } set { _isPortalPowerupActivated = value; } }
 }
