@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.T) && PowerupManager.IsTimeRewindActivated)
         {
-            StartCoroutine(RewindCoroutine());
+            StartCoroutine(RewindRoutine());
         }
 
         if (PowerupManager.IsMagnetPowerupActivated)
@@ -94,7 +94,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private IEnumerator RewindCoroutine()
+    private IEnumerator RewindRoutine()
     {
         // Wait for a short moment to ensure all actions are processed
         yield return new WaitForSeconds(0.1f);
