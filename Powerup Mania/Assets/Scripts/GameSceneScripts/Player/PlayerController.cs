@@ -19,6 +19,9 @@ public class PlayerController : MonoBehaviour
     private float _fireRate = 0.4f;
     private float _fireTime;
 
+    //coroutine variable as i am calling coroutine in update
+    private bool _isCoroutineActive;
+
     //time rewind powerup
     private float _rewindDuration = 10f; // Duration in seconds to rewind
 
@@ -26,9 +29,15 @@ public class PlayerController : MonoBehaviour
     private float _magnetRange = 5f;
     private float _magnetSpeed = 0.1f;
 
+    //invisibility powerup
+    private SpriteRenderer _playerSpriteRenderer;
+    private float _invisibilityDuration = 5f;
+
     private void Start()
     {
         transform.position = Vector3.zero;
+
+        _playerSpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
@@ -42,14 +51,22 @@ public class PlayerController : MonoBehaviour
             _fireTime = Time.time + _fireRate;
         }
 
-        if(Input.GetKeyDown(KeyCode.T) && PowerupManager.IsTimeRewindActivated)
+        if(!_isCoroutineActive && Input.GetKeyDown(KeyCode.T) && PowerupManager.IsTimeRewindActivated)
         {
+            _isCoroutineActive = true;
             StartCoroutine(RewindRoutine());
         }
 
         if (PowerupManager.IsMagnetPowerupActivated)
         {
             MoveTowardsSpikes();
+        }
+
+        if (!_isCoroutineActive && PowerupManager.IsInvisibilityPowerupActivated)
+        {
+            _isCoroutineActive = true;
+            Debug.Log("hey invisible");
+            StartCoroutine(InvisibilityOverRoutine());
         }
     }
 
@@ -96,16 +113,18 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator RewindRoutine()
     {
-        // Wait for a short moment to ensure all actions are processed
+        // Waiting for a short moment to ensure all actions are processed
         yield return new WaitForSeconds(0.1f);
 
-        // Rewind the game state
+        // Rewinding the game state
         float startTime = Time.time;
         while (Time.time - startTime < _rewindDuration)
         {
             TimeManager.Instance.RewindState();
-            yield return new WaitForSeconds(0.1f); // Adjust the delay as needed
+            yield return new WaitForSeconds(0.1f);
         }
+
+        _isCoroutineActive = false;
     }
 
     private void MoveTowardsSpikes()
@@ -122,5 +141,20 @@ public class PlayerController : MonoBehaviour
                 break;
             }
         }
+    }
+
+    private IEnumerator InvisibilityOverRoutine()
+    {
+        Color playerColor = _playerSpriteRenderer.color;
+        playerColor.a = 0.3f;
+        _playerSpriteRenderer.color = playerColor;
+
+        yield return new WaitForSeconds(_invisibilityDuration);
+
+        playerColor.a = 1f;
+        _playerSpriteRenderer.color = playerColor;
+
+        _isCoroutineActive = false;
+        PowerupManager.IsInvisibilityPowerupActivated = false;
     }
 }

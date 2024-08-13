@@ -385,6 +385,8 @@ GameObject:
   m_Component:
   - component: {fileID: 586038004}
   - component: {fileID: 586038003}
+  - component: {fileID: 586038006}
+  - component: {fileID: 586038005}
   m_Layer: 0
   m_Name: InvisibilityPowerup
   m_TagString: Untagged
@@ -452,13 +454,60 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 586038002}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.9553142, y: -1.7408233, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -7.918, y: -2.236, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 820348393}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &586038005
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 586038002}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.17254257, y: 0.12244952}
+  serializedVersion: 2
+  m_Radius: 1.2810688
+--- !u!114 &586038006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 586038002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da87a14aeee715c46847a0da18f2b881, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &677013772
 GameObject:
   m_ObjectHideFlags: 0
@@ -735,6 +784,7 @@ Transform:
   m_Children:
   - {fileID: 444143806}
   - {fileID: 1106484780}
+  - {fileID: 586038004}
   m_Father: {fileID: 677013773}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &838379530
@@ -2021,4 +2071,3 @@ SceneRoots:
   - {fileID: 677013773}
   - {fileID: 1031585532}
   - {fileID: 1851105315}
-  - {fileID: 586038004}
