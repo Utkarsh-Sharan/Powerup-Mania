@@ -12,4 +12,7 @@ public class PowerupManager : MonoBehaviour
 
     private static bool _isPortalPowerupActivated;
     public static bool IsPortalPowerupActivated { get { return _isPortalPowerupActivated; } set { _isPortalPowerupActivated = value; } }
+
+    private static bool _isInvisibilityPowerupActivated;
+    public static bool IsInvisibilityPowerupActivated { get { return _isInvisibilityPowerupActivated; } set { _isInvisibilityPowerupActivated = value; } }
 }
