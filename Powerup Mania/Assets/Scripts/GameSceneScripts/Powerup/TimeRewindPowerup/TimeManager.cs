@@ -14,7 +14,7 @@ public class TimeManager : MonoBehaviour
     private float _saveInterval = 1f; // Time in seconds between saves
     private float _nextSaveTime;
 
-    private int _maxStates = 20; // Maximum number of states to keep in the list
+    private int _maxStates = 10; // Maximum number of states to keep in the list
 
     private void Awake()
     {

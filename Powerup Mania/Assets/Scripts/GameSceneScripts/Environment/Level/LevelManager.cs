@@ -26,7 +26,7 @@ public class LevelManager : MonoBehaviour
         // Fade in
         yield return StartCoroutine(Fade(_fadeInAndOutImage, 0f, 1f, 1f));
 
-        // Swap environment objects
+        // Swapping environment objects
         _environmentObjects[0].SetActive(!_environmentObjects[0].activeSelf);
         _environmentObjects[1].SetActive(!_environmentObjects[1].activeSelf);
 
