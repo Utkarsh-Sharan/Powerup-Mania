@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerPowerupEffectHandler : MonoBehaviour
 {
@@ -40,6 +41,13 @@ public class PlayerPowerupEffectHandler : MonoBehaviour
         {
             _isCoroutineActive = true;
             StartCoroutine(InvisibilityOverRoutine());
+        }
+
+        if(!_isCoroutineActive && PowerupManager.IsLevelEndPowerupActivated)
+        {
+            _isCoroutineActive = true;
+            SceneManager.LoadScene(1);
+            PowerupManager.IsLevelEndPowerupActivated = false;
         }
     }
 
