@@ -9,6 +9,7 @@ public class TimeManager : MonoBehaviour
     public static TimeManager Instance { get { return _instance; } set { _instance = value; } }
 
     [SerializeField] private Transform _playerTransform; // Reference to the player's Transform
+    [SerializeField] private PowerupManager _powerupManager; //Reference to powerup manager
 
     private List<GameState> _stateList = new List<GameState>(); // Use a List for flexibility
     private float _saveInterval = 1f; // Time in seconds between saves
@@ -48,7 +49,7 @@ public class TimeManager : MonoBehaviour
     private void SaveState()
     {
         GameState state = new GameState();
-        state.Save(_playerTransform);
+        state.Save(_playerTransform, _powerupManager);
 
         // Ensure the list does not exceed the maximum size
         if (_stateList.Count >= _maxStates)
@@ -67,7 +68,7 @@ public class TimeManager : MonoBehaviour
             // Get the most recent state (last element)
             GameState state = _stateList[_stateList.Count - 1];
             _stateList.RemoveAt(_stateList.Count - 1); // Remove the most recent state
-            state.Restore(_playerTransform);
+            state.Restore(_playerTransform, _powerupManager);
         }
     }
 }
@@ -76,16 +77,48 @@ public class TimeManager : MonoBehaviour
 public class GameState
 {
     private Vector2 playerPosition;
+    private Dictionary<string, bool> _powerups;
+    private Dictionary<string, Vector2> _powerupPositions;
 
-    // Save the player's current position
-    public void Save(Transform playerTransform)
+    public GameState()
     {
-        playerPosition = playerTransform.position;
+        _powerups = new Dictionary<string, bool>();
+        _powerupPositions = new Dictionary<string, Vector2>();
     }
 
-    // Restore the player's position to the saved state
-    public void Restore(Transform playerTransform)
+    public void Save(Transform playerTransform, PowerupManager powerupManager)
     {
+        //saving player positions
+        playerPosition = playerTransform.position;
+
+        //saving powerup states
+        _powerups["Magnet"] = PowerupManager.IsMagnetPowerupActivated;
+        _powerups["Invisibility"] = PowerupManager.IsInvisibilityPowerupActivated;
+
+        //saving powerup positions
+        foreach(var powerup in powerupManager.GetAllPowerups())
+        {
+            _powerupPositions[powerup.name] = powerup.transform.position;
+        }
+    }
+
+    public void Restore(Transform playerTransform, PowerupManager powerupManager)
+    {
+        //restoring playr positions
         playerTransform.position = playerPosition;
+
+        //restoring powerup states
+        PowerupManager.IsMagnetPowerupActivated = _powerups.GetValueOrDefault("Magnet", false);
+        PowerupManager.IsInvisibilityPowerupActivated = _powerups.GetValueOrDefault("Invisibility", false);
+
+        //restoring powerup positions
+        foreach(var powerup in powerupManager.GetAllPowerups())
+        {
+            if(_powerupPositions.TryGetValue(powerup.name, out Vector2 position))
+            {
+                powerup.transform.position = position;
+                powerup.gameObject.SetActive(true);
+            }
+        }
     }
 }
