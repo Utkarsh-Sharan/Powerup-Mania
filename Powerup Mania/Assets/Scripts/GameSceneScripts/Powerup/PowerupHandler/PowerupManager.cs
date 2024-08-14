@@ -40,16 +40,6 @@ public class PowerupManager : MonoBehaviour
         if (!_powerups.Contains(powerup))
         {
             _powerups.Add(powerup);
-            Debug.Log($"Registered powerup: {powerup.name}");
-        }
-    }
-
-    public void UnregisterPowerup(Powerup powerup)
-    {
-        if (_powerups.Contains(powerup))
-        {
-            _powerups.Remove(powerup);
-            Debug.Log($"Unregistered powerup: {powerup.name}");
         }
     }
 

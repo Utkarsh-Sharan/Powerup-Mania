@@ -59,12 +59,15 @@ public class PlayerPowerupEffectHandler : MonoBehaviour
 
         // Rewinding the game state
         float startTime = Time.time;
-        while (Time.time - startTime < _rewindDuration)
+        float elapsedTime = Time.time - startTime;
+
+        while (elapsedTime < _rewindDuration && TimeManager.Instance.StateListCount() > 0)
         {
             TimeManager.Instance.RewindState();
             yield return new WaitForSeconds(0.1f);
         }
 
+        TimeManager.Instance.ClearStateList();
         _isCoroutineActive = false;
     }
 

@@ -1,9 +1,6 @@
 using UnityEngine;
 
-public class PortalPowerup : Powerup
+public class PortalPowerup : MonoBehaviour
 {
-    protected override void OnEnable()
-    {
-        PowerupManager.Instance.RegisterPowerup(this);
-    }
+    
 }

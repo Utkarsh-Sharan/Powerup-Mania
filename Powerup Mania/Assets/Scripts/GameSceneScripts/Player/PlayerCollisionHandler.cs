@@ -6,32 +6,39 @@ public class PlayerCollisionHandler : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D other)
     {
-        var powerup = other.GetComponent<Powerup>();
+        var rewindablePowerup = other.GetComponent<Powerup>();
 
-        if (powerup != null)
+        if (rewindablePowerup != null)
         {
-            if (powerup is TimeRewindPowerup)
-            {
-                PowerupManager.IsTimeRewindActivated = true;
-            }
-            else if (powerup is MagnetPowerup)
+            if (rewindablePowerup is MagnetPowerup)
             {
                 PowerupManager.IsMagnetPowerupActivated = true;
             }
-            else if (powerup is PortalPowerup)
-            {
-                PowerupManager.IsPortalPowerupActivated = true;
-            }
-            else if (powerup is InvisibilityPowerup)
+            else if (rewindablePowerup is InvisibilityPowerup)
             {
                 PowerupManager.IsInvisibilityPowerupActivated = true;
             }
-            else if (powerup is LevelEndPowerup)
-            {
-                PowerupManager.IsLevelEndPowerupActivated = true;
-            }
 
-            powerup.gameObject.SetActive(false);
+            rewindablePowerup.gameObject.SetActive(false);
+        }
+
+        if (other.GetComponent<TimeRewindPowerup>())
+        {
+            PowerupManager.IsTimeRewindActivated = true;
+
+            Destroy(other.gameObject);
+        }
+        else if (other.GetComponent<PortalPowerup>())
+        {
+            PowerupManager.IsPortalPowerupActivated = true;
+
+            Destroy(other.gameObject);
+        }
+        else if (other.GetComponent<LevelEndPowerup>())
+        {
+            PowerupManager.IsLevelEndPowerupActivated = true;
+
+            Destroy(other.gameObject);
         }
     }
 

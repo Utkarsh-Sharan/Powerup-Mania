@@ -1,9 +1,6 @@
 using UnityEngine;
 
-public class LevelEndPowerup : Powerup
+public class LevelEndPowerup : MonoBehaviour
 {
-    protected override void OnEnable()
-    {
-        PowerupManager.Instance.RegisterPowerup(this);
-    }
+    
 }
