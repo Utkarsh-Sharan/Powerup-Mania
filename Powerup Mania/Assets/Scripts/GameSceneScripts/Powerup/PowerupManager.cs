@@ -15,4 +15,7 @@ public class PowerupManager : MonoBehaviour
 
     private static bool _isInvisibilityPowerupActivated;
     public static bool IsInvisibilityPowerupActivated { get { return _isInvisibilityPowerupActivated; } set { _isInvisibilityPowerupActivated = value; } }
+
+    private static bool _isLevelEndPowerupActivated;
+    public static bool IsLevelEndPowerupActivated { get { return _isLevelEndPowerupActivated; } set { _isLevelEndPowerupActivated = value; } }
 }
