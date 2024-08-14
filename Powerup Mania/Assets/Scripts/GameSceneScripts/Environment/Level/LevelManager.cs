@@ -22,6 +22,7 @@ public class LevelManager : MonoBehaviour
     private IEnumerator HandleLevelTransition()
     {
         _isTransitioning = true;
+        TimeManager.Instance.ClearStateList();  //will clear state list from previous level and start saving current level state list
 
         // Fade in
         yield return StartCoroutine(Fade(_fadeInAndOutImage, 0f, 1f, 1f));
