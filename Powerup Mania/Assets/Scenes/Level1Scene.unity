@@ -864,6 +864,7 @@ Transform:
   - {fileID: 709240057}
   - {fileID: 1630887574}
   - {fileID: 2001808113}
+  - {fileID: 863548783}
   m_Father: {fileID: 928990278}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &863548781
@@ -876,6 +877,8 @@ GameObject:
   m_Component:
   - component: {fileID: 863548783}
   - component: {fileID: 863548782}
+  - component: {fileID: 863548785}
+  - component: {fileID: 863548784}
   m_Layer: 0
   m_Name: LevelEndPowerup
   m_TagString: Untagged
@@ -943,13 +946,70 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 863548781}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -3.8263915, y: -1.8887382, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 854453976}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &863548784
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 863548781}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.045163155, y: -0.033872366}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 5, y: 5}
+    newSize: {x: 5, y: 5}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.69668, y: 3.4870343}
+  m_EdgeRadius: 0
+--- !u!114 &863548785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 863548781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccae3c5322ecec34c89b923e821f3717, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &928990277
 GameObject:
   m_ObjectHideFlags: 0
@@ -2168,4 +2228,3 @@ SceneRoots:
   - {fileID: 677013773}
   - {fileID: 1031585532}
   - {fileID: 1851105315}
-  - {fileID: 863548783}
