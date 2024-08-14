@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class InvisibilityPowerup : Powerup
+public class InvisibilityPowerup : RewindablePowerup
 {
     protected override void OnEnable()
     {
-        PowerupManager.Instance.RegisterPowerup(this);
+        PowerupManager.Instance.RegisterRewindablePowerup(this);
     }
 }

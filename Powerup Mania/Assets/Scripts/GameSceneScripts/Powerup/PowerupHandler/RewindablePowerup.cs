@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class Powerup : MonoBehaviour
+public abstract class RewindablePowerup : MonoBehaviour
 {
     protected abstract void OnEnable();
 }

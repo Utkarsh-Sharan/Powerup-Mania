@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class MagnetPowerup : Powerup
+public class MagnetPowerup : RewindablePowerup
 {
     protected override void OnEnable()
     {
-        PowerupManager.Instance.RegisterPowerup(this);
+        PowerupManager.Instance.RegisterRewindablePowerup(this);
     }
 }

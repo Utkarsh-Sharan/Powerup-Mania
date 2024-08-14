@@ -6,7 +6,7 @@ public class PlayerCollisionHandler : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D other)
     {
-        var rewindablePowerup = other.GetComponent<Powerup>();
+        var rewindablePowerup = other.GetComponent<RewindablePowerup>();
 
         if (rewindablePowerup != null)
         {

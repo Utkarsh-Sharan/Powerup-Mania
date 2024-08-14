@@ -6,7 +6,7 @@ public class PowerupManager : MonoBehaviour
 {
     public static PowerupManager Instance { get; private set; }
 
-    private List<Powerup> _powerups = new List<Powerup>();
+    private List<RewindablePowerup> _powerups = new List<RewindablePowerup>();
 
     private static bool _isTimeRewindActivated;
     public static bool IsTimeRewindActivated { get { return _isTimeRewindActivated; } set { _isTimeRewindActivated = value; } }
@@ -35,7 +35,7 @@ public class PowerupManager : MonoBehaviour
         }
     }
 
-    public void RegisterPowerup(Powerup powerup)
+    public void RegisterRewindablePowerup(RewindablePowerup powerup)
     {
         if (!_powerups.Contains(powerup))
         {
@@ -43,7 +43,7 @@ public class PowerupManager : MonoBehaviour
         }
     }
 
-    public IEnumerable<Powerup> GetAllPowerups()
+    public IEnumerable<RewindablePowerup> GetAllPowerups()
     {
         return _powerups;
     }
