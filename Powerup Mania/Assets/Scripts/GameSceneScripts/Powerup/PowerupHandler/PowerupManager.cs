@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PowerupManager : MonoBehaviour
 {
+    public static PowerupManager Instance { get; private set; }
+
+    private List<Powerup> _powerups = new List<Powerup>();
+
     private static bool _isTimeRewindActivated;
     public static bool IsTimeRewindActivated { get { return _isTimeRewindActivated; } set { _isTimeRewindActivated = value; } }
 
@@ -18,4 +22,37 @@ public class PowerupManager : MonoBehaviour
 
     private static bool _isLevelEndPowerupActivated;
     public static bool IsLevelEndPowerupActivated { get { return _isLevelEndPowerupActivated; } set { _isLevelEndPowerupActivated = value; } }
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public void RegisterPowerup(Powerup powerup)
+    {
+        if (!_powerups.Contains(powerup))
+        {
+            _powerups.Add(powerup);
+        }
+    }
+
+    public void UnregisterPowerup(Powerup powerup)
+    {
+        if (_powerups.Contains(powerup))
+        {
+            _powerups.Remove(powerup);
+        }
+    }
+
+    public IEnumerable<Powerup> GetAllPowerups()
+    {
+        return _powerups;
+    }
 }
