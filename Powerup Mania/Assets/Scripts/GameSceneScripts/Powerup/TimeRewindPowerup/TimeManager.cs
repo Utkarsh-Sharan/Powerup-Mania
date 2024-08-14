@@ -118,6 +118,7 @@ public class GameState
             {
                 powerup.transform.position = position;
                 powerup.gameObject.SetActive(true);
+                Debug.Log($"Powerup {powerup.name} restored to position {position}");
             }
         }
     }

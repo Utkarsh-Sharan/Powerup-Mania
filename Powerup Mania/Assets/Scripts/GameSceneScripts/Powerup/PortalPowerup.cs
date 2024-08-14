@@ -6,9 +6,4 @@ public class PortalPowerup : Powerup
     {
         PowerupManager.Instance.RegisterPowerup(this);
     }
-
-    protected override void OnDisable()
-    {
-        PowerupManager.Instance.UnregisterPowerup(this);
-    }
 }
