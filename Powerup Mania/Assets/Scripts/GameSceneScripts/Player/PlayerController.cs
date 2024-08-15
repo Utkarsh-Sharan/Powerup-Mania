@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private static PlayerController _instance;
+    public static PlayerController Instance { get { return _instance; } set { _instance = value; } }
+
     [SerializeField] private Camera _mainCamera;
     [SerializeField] private GameObject _bulletPrefab;
     [SerializeField] private Transform _shootPoint;
@@ -18,6 +21,19 @@ public class PlayerController : MonoBehaviour
     private float _shootForce = 5f;
     private float _fireRate = 0.4f;
     private float _fireTime;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
 
     private void Start()
     {

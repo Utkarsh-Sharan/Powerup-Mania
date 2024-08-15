@@ -1,59 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> _environmentObjects = new List<GameObject>();
-    [SerializeField] private Image _fadeInAndOutImage;
-
-    private bool _isTransitioning;
-
     private void Update()
     {
-        if (PowerupManager.IsPortalPowerupActivated && !_isTransitioning)
+        if (PowerupManager.IsPortalPowerupActivated)
         {
-            StartCoroutine(HandleLevelTransition());
+            //StartCoroutine(HandleLevelTransition());
             PowerupManager.IsPortalPowerupActivated = false;
+            TimeManager.Instance.ClearStateList();
+
+            SceneManager.LoadScene(1);
         }
     }
 
     private IEnumerator HandleLevelTransition()
     {
-        _isTransitioning = true;
-        TimeManager.Instance.ClearStateList();  //will clear state list from previous level and start saving current level state list
+        //_isTransitioning = true;
+        //TimeManager.Instance.ClearStateList();  //will clear state list from previous level and start saving current level state list
 
-        // Fade in
-        yield return StartCoroutine(Fade(_fadeInAndOutImage, 0f, 1f, 1f));
+        //// Fade in
+        //yield return StartCoroutine(Fade(_fadeInAndOutImage, 0f, 1f, 1f));
 
-        // Swapping environment objects
-        _environmentObjects[0].SetActive(!_environmentObjects[0].activeSelf);
-        _environmentObjects[1].SetActive(!_environmentObjects[1].activeSelf);
+        //// Swapping environment objects
+        //_environmentObjects[0].SetActive(!_environmentObjects[0].activeSelf);
+        //_environmentObjects[1].SetActive(!_environmentObjects[1].activeSelf);
 
-        // Fade out
-        yield return StartCoroutine(Fade(_fadeInAndOutImage, 1f, 0f, 1f));
+        //// Fade out
+        yield return new WaitForSeconds(1);
 
-        _isTransitioning = false;
+        //_isTransitioning = false;
     }
-
-    private IEnumerator Fade(Image image, float startAlpha, float endAlpha, float duration)
-    {
-        float elapsedTime = 0f;
-        Color color = image.color;
-        color.a = startAlpha;
-        image.color = color;
-
-        while (elapsedTime < duration)
-        {
-            elapsedTime += Time.deltaTime;
-            color.a = Mathf.Lerp(startAlpha, endAlpha, elapsedTime / duration);
-            image.color = color;
-            yield return null;
-        }
-
-        color.a = endAlpha;
-        image.color = color;
-    }
-
 }
