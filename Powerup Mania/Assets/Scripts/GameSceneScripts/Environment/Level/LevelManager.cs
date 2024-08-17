@@ -27,26 +27,14 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    private void Update()
+    public void LoadPortalLevelScene()
     {
-        if (PowerupManager.IsPortalPowerupActivated)
-        {
-            PowerupManager.IsPortalPowerupActivated = false;
+        SceneManager.LoadScene(1);
+    }
 
-            TimeManager.Instance.ClearStateList();  //clearing old states for new level
-
-            SceneManager.LoadScene(1);
-        }
-
-        if (PowerupManager.IsBackToLevel1PowerupActivated)
-        {
-            playerCameBackFromPortalLevel = true;
-            PowerupManager.IsBackToLevel1PowerupActivated = false;
-
-            TimeManager.Instance.ClearStateList();  //clearing old states for new level
-
-            StartCoroutine(WaitForSomeTimeThenLoadScene());
-        }
+    public void LoadLevel1Scene()
+    {
+        StartCoroutine(WaitForSomeTimeThenLoadScene());
     }
 
     private IEnumerator WaitForSomeTimeThenLoadScene()
