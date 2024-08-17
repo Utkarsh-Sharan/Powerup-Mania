@@ -21,7 +21,15 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        transform.position = Vector3.zero;
+        if (LevelManager.Instance.playerCameBackFromPortalLevel)
+        {
+            transform.position = LevelManager.playerLastPosition;
+            LevelManager.Instance.playerCameBackFromPortalLevel = false;
+        }
+        else
+        {
+            transform.position = Vector3.zero;
+        }
     }
 
     private void Update()

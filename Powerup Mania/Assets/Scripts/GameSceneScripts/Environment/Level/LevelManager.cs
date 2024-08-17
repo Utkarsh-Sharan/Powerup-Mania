@@ -11,7 +11,8 @@ public class LevelManager : MonoBehaviour
 
     private HashSet<int> _collectedPowerups = new HashSet<int>();
 
-    [SerializeField] private Transform _playerTransform;
+    [HideInInspector] public static Vector2 playerLastPosition;
+    [HideInInspector] public bool playerCameBackFromPortalLevel;
 
     private void Awake()
     {
@@ -39,12 +40,19 @@ public class LevelManager : MonoBehaviour
 
         if (PowerupManager.IsBackToLevel1PowerupActivated)
         {
+            playerCameBackFromPortalLevel = true;
             PowerupManager.IsBackToLevel1PowerupActivated = false;
 
             TimeManager.Instance.ClearStateList();  //clearing old states for new level
 
-            SceneManager.LoadScene(0);
+            StartCoroutine(WaitForSomeTimeThenLoadScene());
         }
+    }
+
+    private IEnumerator WaitForSomeTimeThenLoadScene()
+    {
+        yield return new WaitForSeconds(0.1f);
+        SceneManager.LoadScene(0);
     }
 
     public void CollectPowerup(int powerupID)
@@ -54,6 +62,6 @@ public class LevelManager : MonoBehaviour
 
     public bool IsPowerupCollected(int powerupID)
     {
-        return _collectedPowerups.Contains(powerupID);  //very effeicient as this takes O(1) time, that's why used hash set
+        return _collectedPowerups.Contains(powerupID);  //very efficient as this takes O(1) time, that's why used hash set
     }
 }
