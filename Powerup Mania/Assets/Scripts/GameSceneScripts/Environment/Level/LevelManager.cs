@@ -34,5 +34,14 @@ public class LevelManager : MonoBehaviour
 
             SceneManager.LoadScene(1);
         }
+
+        if (PowerupManager.IsBackToLevel1PowerupActivated)
+        {
+            PowerupManager.IsBackToLevel1PowerupActivated = false;
+
+            TimeManager.Instance.ClearStateList();  //clearing old states for new level
+
+            SceneManager.LoadScene(0);
+        }
     }
 }

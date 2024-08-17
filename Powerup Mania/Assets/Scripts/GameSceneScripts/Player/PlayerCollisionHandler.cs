@@ -40,6 +40,12 @@ public class PlayerCollisionHandler : MonoBehaviour
 
             Destroy(other.gameObject);
         }
+        else if (other.GetComponent<BackToLevel1Powerup>())
+        {
+            PowerupManager.IsBackToLevel1PowerupActivated = true;
+
+            Destroy(other.gameObject);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
