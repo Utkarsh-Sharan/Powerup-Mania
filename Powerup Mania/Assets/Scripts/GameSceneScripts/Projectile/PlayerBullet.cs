@@ -26,7 +26,7 @@ public class PlayerBullet : MonoBehaviour
         }
         else if (other.gameObject.GetComponent<MagnetPowerup>())
         {
-            Destroy(other.gameObject);
+            other.gameObject.SetActive(false);
             Destroy(this.gameObject);
         }
     }
