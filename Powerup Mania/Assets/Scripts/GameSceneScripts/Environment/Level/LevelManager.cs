@@ -1,59 +1,55 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> _environmentObjects = new List<GameObject>();
-    [SerializeField] private Image _fadeInAndOutImage;
+    private static LevelManager _instance;
+    public static LevelManager Instance { get { return _instance; } set { _instance = value; } }
 
-    private bool _isTransitioning;
+    private HashSet<int> _collectedPowerups = new HashSet<int>();
 
-    private void Update()
+    [HideInInspector] public static Vector2 playerLastPosition;
+    [HideInInspector] public bool playerCameBackFromPortalLevel;
+
+    private void Awake()
     {
-        if (PowerupManager.IsPortalPowerupActivated && !_isTransitioning)
+        if (Instance == null)
         {
-            StartCoroutine(HandleLevelTransition());
-            PowerupManager.IsPortalPowerupActivated = false;
+            Instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else
+        {
+            Destroy(this.gameObject);
         }
     }
 
-    private IEnumerator HandleLevelTransition()
+    public void LoadPortalLevelScene()
     {
-        _isTransitioning = true;
-        TimeManager.Instance.ClearStateList();  //will clear state list from previous level and start saving current level state list
-
-        // Fade in
-        yield return StartCoroutine(Fade(_fadeInAndOutImage, 0f, 1f, 1f));
-
-        // Swapping environment objects
-        _environmentObjects[0].SetActive(!_environmentObjects[0].activeSelf);
-        _environmentObjects[1].SetActive(!_environmentObjects[1].activeSelf);
-
-        // Fade out
-        yield return StartCoroutine(Fade(_fadeInAndOutImage, 1f, 0f, 1f));
-
-        _isTransitioning = false;
+        SceneManager.LoadScene(1);
     }
 
-    private IEnumerator Fade(Image image, float startAlpha, float endAlpha, float duration)
+    public void LoadLevel1Scene()
     {
-        float elapsedTime = 0f;
-        Color color = image.color;
-        color.a = startAlpha;
-        image.color = color;
-
-        while (elapsedTime < duration)
-        {
-            elapsedTime += Time.deltaTime;
-            color.a = Mathf.Lerp(startAlpha, endAlpha, elapsedTime / duration);
-            image.color = color;
-            yield return null;
-        }
-
-        color.a = endAlpha;
-        image.color = color;
+        StartCoroutine(WaitForSomeTimeThenLoadScene());
     }
 
+    private IEnumerator WaitForSomeTimeThenLoadScene()
+    {
+        yield return new WaitForSeconds(0.1f);
+        SceneManager.LoadScene(0);
+    }
+
+    public void CollectPowerup(int powerupID)
+    {
+        _collectedPowerups.Add(powerupID);
+    }
+
+    public bool IsPowerupCollected(int powerupID)
+    {
+        return _collectedPowerups.Contains(powerupID);  //very efficient as this takes O(1) time, that's why used hash set
+    }
 }

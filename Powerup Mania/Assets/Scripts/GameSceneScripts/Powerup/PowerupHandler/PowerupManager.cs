@@ -23,6 +23,9 @@ public class PowerupManager : MonoBehaviour
     private static bool _isLevelEndPowerupActivated;
     public static bool IsLevelEndPowerupActivated { get { return _isLevelEndPowerupActivated; } set { _isLevelEndPowerupActivated = value; } }
 
+    private static bool _isBackToLevel1PowerupActivated;
+    public static bool IsBackToLevel1PowerupActivated { get { return _isBackToLevel1PowerupActivated; } set { _isBackToLevel1PowerupActivated = value; } }
+
     private void Awake()
     {
         if (Instance == null)
@@ -31,7 +34,7 @@ public class PowerupManager : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject);
+            Destroy(this.gameObject);
         }
     }
 

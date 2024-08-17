@@ -49,6 +49,25 @@ public class PlayerPowerupEffectHandler : MonoBehaviour
             SceneManager.LoadScene(1);
             PowerupManager.IsLevelEndPowerupActivated = false;
         }
+
+        if (PowerupManager.IsPortalPowerupActivated)
+        {
+            PowerupManager.IsPortalPowerupActivated = false;
+
+            TimeManager.Instance.ClearStateList();  //clearing old states for new level
+
+            LevelManager.Instance.LoadPortalLevelScene();
+        }
+
+        if (PowerupManager.IsBackToLevel1PowerupActivated)
+        {
+            LevelManager.Instance.playerCameBackFromPortalLevel = true;
+            PowerupManager.IsBackToLevel1PowerupActivated = false;
+
+            TimeManager.Instance.ClearStateList();  //clearing old states for new level
+
+            LevelManager.Instance.LoadLevel1Scene();
+        }
     }
 
 

@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Level1Scene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
+    path: Assets/Scenes/PortalLevelScene.unity
+    guid: 162c008c8b5d53748b426873f439fc06
+  - enabled: 1
     path: Assets/Scenes/AbruptLevelEndScene.unity
     guid: 4b2a6ed72e7b7af4ebb3d9870632d99e
   m_configObjects: {}

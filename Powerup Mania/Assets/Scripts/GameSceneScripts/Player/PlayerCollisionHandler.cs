@@ -26,11 +26,22 @@ public class PlayerCollisionHandler : MonoBehaviour
         {
             PowerupManager.IsTimeRewindActivated = true;
 
+            LevelManager.Instance.CollectPowerup(TimeRewindPowerup.GetPowerupID());
+
             Destroy(other.gameObject);
         }
         else if (other.GetComponent<PortalPowerup>())
         {
             PowerupManager.IsPortalPowerupActivated = true;
+
+            LevelManager.Instance.CollectPowerup(PortalPowerup.GetPowerupID());
+            LevelManager.playerLastPosition = this.transform.position;
+
+            Destroy(other.gameObject);
+        }
+        else if (other.GetComponent<BackToLevel1Powerup>())
+        {
+            PowerupManager.IsBackToLevel1PowerupActivated = true;
 
             Destroy(other.gameObject);
         }
