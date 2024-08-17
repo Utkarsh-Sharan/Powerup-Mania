@@ -22,7 +22,6 @@ public class TimeManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(this.gameObject);
         }
         else
         {
@@ -63,11 +62,6 @@ public class TimeManager : MonoBehaviour
         stateList.Add(state); 
     }
 
-    public float StateListCount()
-    {
-        return stateList.Count;
-    }
-
     public void RewindState()
     {
         if (stateList.Count > 0)
@@ -76,6 +70,11 @@ public class TimeManager : MonoBehaviour
             stateList.RemoveAt(stateList.Count - 1);              // Remove the most recent state
             state.Restore(_playerTransform, _powerupManager);
         }
+    }
+
+    public float StateListCount()
+    {
+        return stateList.Count;
     }
 
     public void ClearStateList()
@@ -102,12 +101,12 @@ public class GameState
         //saving player positions
         playerPosition = playerTransform.position;
 
-        //saving powerup states
+        //saving rewindable powerup states
         _powerups["Magnet"] = PowerupManager.IsMagnetPowerupActivated;
         _powerups["Invisibility"] = PowerupManager.IsInvisibilityPowerupActivated;
 
-        //saving powerup positions
-        foreach(var powerup in powerupManager.GetAllPowerups())
+        //saving rewindable powerup positions
+        foreach (var powerup in powerupManager.GetAllPowerups())
         {
             _powerupPositions[powerup.name] = powerup.transform.position;
         }
@@ -118,12 +117,12 @@ public class GameState
         //restoring player positions
         playerTransform.position = playerPosition;
 
-        //restoring powerup states
+        //restoring rewindable powerup states
         PowerupManager.IsMagnetPowerupActivated = _powerups.GetValueOrDefault("Magnet", false);
         PowerupManager.IsInvisibilityPowerupActivated = _powerups.GetValueOrDefault("Invisibility", false);
-        
-        //restoring powerup positions
-        foreach(var powerup in powerupManager.GetAllPowerups())
+
+        //restoring rewindable powerup positions
+        foreach (var powerup in powerupManager.GetAllPowerups())
         {
             if(_powerupPositions.TryGetValue(powerup.name, out Vector2 position))
             {
