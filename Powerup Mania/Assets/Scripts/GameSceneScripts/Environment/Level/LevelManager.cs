@@ -9,6 +9,8 @@ public class LevelManager : MonoBehaviour
     private static LevelManager _instance;
     public static LevelManager Instance { get { return _instance; } set { _instance = value; } }
 
+    private HashSet<int> _collectedPowerups = new HashSet<int>();
+
     [SerializeField] private Transform _playerTransform;
 
     private void Awake()
@@ -43,5 +45,15 @@ public class LevelManager : MonoBehaviour
 
             SceneManager.LoadScene(0);
         }
+    }
+
+    public void CollectPowerup(int powerupID)
+    {
+        _collectedPowerups.Add(powerupID);
+    }
+
+    public bool IsPowerupCollected(int powerupID)
+    {
+        return _collectedPowerups.Contains(powerupID);  //very effeicient as this takes O(1) time, that's why used hash set
     }
 }
