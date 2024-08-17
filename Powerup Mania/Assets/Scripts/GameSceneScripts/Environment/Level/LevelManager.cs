@@ -10,6 +10,7 @@ public class LevelManager : MonoBehaviour
     public static LevelManager Instance { get { return _instance; } set { _instance = value; } }
 
     private HashSet<int> _collectedPowerups = new HashSet<int>();
+    private HashSet<int> _destroyedEnemies = new HashSet<int>();
 
     [HideInInspector] public static Vector2 playerLastPosition;
     [HideInInspector] public bool playerCameBackFromPortalLevel;
@@ -51,5 +52,15 @@ public class LevelManager : MonoBehaviour
     public bool IsPowerupCollected(int powerupID)
     {
         return _collectedPowerups.Contains(powerupID);  //very efficient as this takes O(1) time, that's why used hash set
+    }
+
+    public void DestroyEnemy(int enemyID)
+    {
+        _destroyedEnemies.Add(enemyID);
+    }
+
+    public bool IsEnemyDestroyed(int enemyID)
+    {
+        return _destroyedEnemies.Contains(enemyID);
     }
 }

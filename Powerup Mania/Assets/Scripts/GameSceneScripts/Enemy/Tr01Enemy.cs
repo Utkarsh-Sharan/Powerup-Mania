@@ -5,7 +5,17 @@ using UnityEngine;
 public class Tr01Enemy : MonoBehaviour
 {
     private float _moveSpeed = 2f;
+    private static int _enemyID = 1;
+
     public static bool playerInDetectionZone;
+
+    private void Start()
+    {
+        if (LevelManager.Instance.IsEnemyDestroyed(_enemyID))
+        {
+            Destroy(this.gameObject);
+        }
+    }
 
     private void Update()
     {
@@ -20,5 +30,10 @@ public class Tr01Enemy : MonoBehaviour
                 transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, _moveSpeed * Time.deltaTime);
             }
         }
+    }
+
+    public static int GetEnemyID()
+    {
+        return _enemyID;
     }
 }

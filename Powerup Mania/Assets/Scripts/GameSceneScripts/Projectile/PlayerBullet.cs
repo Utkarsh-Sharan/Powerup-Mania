@@ -16,8 +16,18 @@ public class PlayerBullet : MonoBehaviour
         transform.Translate(Vector3.up * _bulletSpeed * Time.deltaTime);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        Destroy(this.gameObject);
+        if (other.gameObject.GetComponent<Tr01Enemy>())
+        {
+            LevelManager.Instance.DestroyEnemy(Tr01Enemy.GetEnemyID());
+            Destroy(other.gameObject);
+            Destroy(this.gameObject);
+        }
+        else if (other.gameObject.GetComponent<MagnetPowerup>())
+        {
+            Destroy(other.gameObject);
+            Destroy(this.gameObject);
+        }
     }
 }
