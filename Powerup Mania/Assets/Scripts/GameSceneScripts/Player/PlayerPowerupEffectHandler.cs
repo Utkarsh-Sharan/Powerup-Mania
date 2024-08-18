@@ -80,6 +80,11 @@ public class PlayerPowerupEffectHandler : MonoBehaviour
         float startTime = Time.time;
         float elapsedTime = Time.time - startTime;
 
+        if(PlayerController.playerLifeStatus == PlayerLifeStatus.DEAD)
+        {
+            PlayerController.playerLifeStatus = PlayerLifeStatus.ALIVE;
+        }
+
         while (elapsedTime < _rewindDuration && TimeManager.Instance.StateListCount() > 0)
         {
             TimeManager.Instance.RewindState();

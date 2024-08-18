@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerLifeStatus playerLifeStatus;
+
     [SerializeField] private Camera _mainCamera;
     [SerializeField] private GameObject _bulletPrefab;
     [SerializeField] private Transform _shootPoint;
+    [SerializeField] private SpriteRenderer _playerSpriteRenderer;
 
     //player movement and input
     private float _playerSpeed = 10f;
@@ -34,13 +37,34 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        HandleMovement();
-        HandleRotation();
+        HandlePlayerLifestatus();
 
-        if (Input.GetMouseButtonDown(0) && Time.time > _fireTime)
+        if(playerLifeStatus == PlayerLifeStatus.ALIVE)
         {
-            Shoot();
-            _fireTime = Time.time + _fireRate;
+            HandleMovement();
+            HandleRotation();
+
+            if (Input.GetMouseButtonDown(0) && Time.time > _fireTime)
+            {
+                Shoot();
+                _fireTime = Time.time + _fireRate;
+            }
+        }
+    }
+
+    private void HandlePlayerLifestatus()
+    {
+        if(playerLifeStatus == PlayerLifeStatus.ALIVE)
+        {
+            Color playerColor = _playerSpriteRenderer.color;
+            playerColor.a = 255;
+            _playerSpriteRenderer.color = playerColor;
+        }
+        else if(playerLifeStatus == PlayerLifeStatus.DEAD)
+        {
+            Color playerColor = _playerSpriteRenderer.color;
+            playerColor.a = 0;
+            _playerSpriteRenderer.color = playerColor;
         }
     }
 
@@ -84,4 +108,10 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+}
+
+public enum PlayerLifeStatus
+{
+    ALIVE,
+    DEAD
 }
