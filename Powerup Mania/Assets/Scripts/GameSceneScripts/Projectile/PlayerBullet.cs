@@ -21,12 +21,22 @@ public class PlayerBullet : MonoBehaviour
         if (other.gameObject.GetComponent<Tr01Enemy>())
         {
             LevelManager.Instance.DestroyEnemy(Tr01Enemy.GetEnemyID());
+
             Destroy(other.gameObject);
             Destroy(this.gameObject);
         }
         else if (other.gameObject.GetComponent<MagnetPowerup>())
         {
+            LevelManager.Instance.CollectPowerup(MagnetPowerup.GetPowerupID());
+
             other.gameObject.SetActive(false);
+            Destroy(this.gameObject);
+        }
+        else if (other.gameObject.GetComponent<LevelEndPowerup>())
+        {
+            LevelManager.Instance.CollectPowerup(LevelEndPowerup.GetPowerupID());
+
+            Destroy(other.gameObject);
             Destroy(this.gameObject);
         }
     }
