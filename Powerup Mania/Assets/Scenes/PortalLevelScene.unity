@@ -3848,6 +3848,7 @@ MonoBehaviour:
   _mainCamera: {fileID: 151345901}
   _bulletPrefab: {fileID: 8461847994613328692, guid: 89607639884193d41a1585a7b93c41dd, type: 3}
   _shootPoint: {fileID: 170481527}
+  _playerSpriteRenderer: {fileID: 1115651212}
 --- !u!212 &1115651212
 SpriteRenderer:
   m_ObjectHideFlags: 0

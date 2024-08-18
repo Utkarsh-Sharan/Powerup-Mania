@@ -58,7 +58,21 @@ public class PlayerCollisionHandler : MonoBehaviour
         if (other.gameObject.GetComponent<Spikes>())
         {
             PowerupManager.IsMagnetPowerupActivated = false;
-            this.gameObject.SetActive(false);
+
+            PlayerController.playerLifeStatus = PlayerLifeStatus.DEAD;
+        }
+        else if (other.gameObject.GetComponent<Tr01Enemy>())
+        {
+            PlayerController.playerLifeStatus = PlayerLifeStatus.DEAD;
+        }
+        else if (other.gameObject.GetComponent<BlueTr01Enemy>())
+        {
+            PlayerController.playerLifeStatus = PlayerLifeStatus.DEAD;
+
+            //if (PowerupManager.IsInvisibilityPowerupActivated)
+            //{
+            //    PowerupManager.IsInvisibilityPowerupActivated = false;
+            //}
         }
     }
 }

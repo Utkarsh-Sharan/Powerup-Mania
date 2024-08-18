@@ -6017,6 +6017,7 @@ MonoBehaviour:
   _mainCamera: {fileID: 519420031}
   _bulletPrefab: {fileID: 8461847994613328692, guid: 89607639884193d41a1585a7b93c41dd, type: 3}
   _shootPoint: {fileID: 1783901424}
+  _playerSpriteRenderer: {fileID: 1029637392}
 --- !u!50 &1029637395
 Rigidbody2D:
   serializedVersion: 4
