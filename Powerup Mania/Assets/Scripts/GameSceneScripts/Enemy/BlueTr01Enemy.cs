@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tr01Enemy : MonoBehaviour
+public class BlueTr01Enemy : MonoBehaviour
 {
     private float _moveSpeed = 2f;
-    private static int _enemyID = 1;
+    private static int _enemyID = 2;
 
     public static bool playerInDetectionZone;
 
@@ -19,7 +19,7 @@ public class Tr01Enemy : MonoBehaviour
 
     private void Update()
     {
-        if (playerInDetectionZone && !PowerupManager.IsInvisibilityPowerupActivated)
+        if (playerInDetectionZone && PowerupManager.IsInvisibilityPowerupActivated)
         {
             Transform playerTransform = PlayerTransformManager.Instance.playerTransform;
 

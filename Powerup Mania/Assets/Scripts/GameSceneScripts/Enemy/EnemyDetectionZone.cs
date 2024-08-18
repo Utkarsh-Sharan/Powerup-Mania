@@ -9,6 +9,7 @@ public class EnemyDetectionZone : MonoBehaviour
         if (other.gameObject.GetComponent<PlayerController>())
         {
             Tr01Enemy.playerInDetectionZone = true;
+            BlueTr01Enemy.playerInDetectionZone = true;
         }
     }
 
@@ -17,6 +18,7 @@ public class EnemyDetectionZone : MonoBehaviour
         if (other.gameObject.GetComponent<PlayerController>())
         {
             Tr01Enemy.playerInDetectionZone = false;
+            BlueTr01Enemy.playerInDetectionZone = false;
         }
     }
 }
