@@ -21,9 +21,8 @@ public class PlayerPowerupEffectHandler : MonoBehaviour
 
     private void Update()
     {
-        if (!_isCoroutineActive && Input.GetKeyDown(KeyCode.T) && PowerupManager.IsTimeRewindActivated)
+        if (Input.GetKeyDown(KeyCode.T) && PowerupManager.IsTimeRewindActivated)
         {
-            _isCoroutineActive = true;
             StartCoroutine(RewindRoutine());
         }
 

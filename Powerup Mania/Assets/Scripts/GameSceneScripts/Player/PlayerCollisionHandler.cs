@@ -69,10 +69,10 @@ public class PlayerCollisionHandler : MonoBehaviour
         {
             PlayerController.playerLifeStatus = PlayerLifeStatus.DEAD;
 
-            //if (PowerupManager.IsInvisibilityPowerupActivated)
-            //{
-            //    PowerupManager.IsInvisibilityPowerupActivated = false;
-            //}
+            if (PowerupManager.IsInvisibilityPowerupActivated)
+            {
+                PowerupManager.IsInvisibilityPowerupActivated = false;
+            }
         }
     }
 }
