@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MagnetPowerup : RewindablePowerup
 {
-    private static int _powerupID = 3;
+    [SerializeField] private int _powerupID;
 
     protected override void OnEnable()
     {
@@ -13,7 +13,7 @@ public class MagnetPowerup : RewindablePowerup
         }
     }
 
-    public static int GetPowerupID()
+    public int GetPowerupID()
     {
         return _powerupID;
     }

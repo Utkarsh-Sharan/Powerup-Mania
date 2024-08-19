@@ -16,19 +16,13 @@ public class PlayerPowerupEffectHandler : MonoBehaviour
     private float _magnetSpeed = 0.1f;
 
     //invisibility powerup
-    private SpriteRenderer _playerSpriteRenderer;
+    [SerializeField] private SpriteRenderer _playerSpriteRenderer;
     private float _invisibilityDuration = 5f;
-
-    private void Start()
-    {
-        _playerSpriteRenderer = GetComponent<SpriteRenderer>();
-    }
 
     private void Update()
     {
-        if (!_isCoroutineActive && Input.GetKeyDown(KeyCode.T) && PowerupManager.IsTimeRewindActivated)
+        if (Input.GetKeyDown(KeyCode.T) && PowerupManager.IsTimeRewindActivated)
         {
-            _isCoroutineActive = true;
             StartCoroutine(RewindRoutine());
         }
 
@@ -116,6 +110,8 @@ public class PlayerPowerupEffectHandler : MonoBehaviour
         Color playerColor = _playerSpriteRenderer.color;
         playerColor.a = 0.3f;
         _playerSpriteRenderer.color = playerColor;
+
+        Debug.Log("PlayerColor: " + _playerSpriteRenderer.color.a);
 
         yield return new WaitForSeconds(_invisibilityDuration);
 

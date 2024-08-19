@@ -34,7 +34,8 @@ public class PlayerBullet : MonoBehaviour
         }
         else if (other.gameObject.GetComponent<MagnetPowerup>())
         {
-            LevelManager.Instance.CollectPowerup(MagnetPowerup.GetPowerupID());
+            MagnetPowerup magnetPowerup = other.gameObject.GetComponent<MagnetPowerup>();
+            LevelManager.Instance.CollectPowerup(magnetPowerup.GetPowerupID());
 
             other.gameObject.SetActive(false);
             Destroy(this.gameObject);
