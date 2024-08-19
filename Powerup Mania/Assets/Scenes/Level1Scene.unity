@@ -3102,6 +3102,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69cebf77e9d2b5844b67ffdb8ecb9dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _soundEffect: {fileID: 2098807646}
+  _soundBgMusic: {fileID: 1097634812}
+  _sounds:
+  - soundType: 0
+    soundClip: {fileID: 8300000, guid: e547fad71c7ba364b98e9d9bed265754, type: 3}
+  - soundType: 4
+    soundClip: {fileID: 8300000, guid: eb0796566f2ab9542b2f15d707743468, type: 3}
 --- !u!4 &511535718
 Transform:
   m_ObjectHideFlags: 0
