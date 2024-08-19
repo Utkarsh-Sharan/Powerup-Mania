@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandlePlayerLifestatus()
     {
-        if(playerLifeStatus == PlayerLifeStatus.ALIVE)
+        if(playerLifeStatus == PlayerLifeStatus.ALIVE && !PowerupManager.IsInvisibilityPowerupActivated)
         {
             Color playerColor = _playerSpriteRenderer.color;
             playerColor.a = 255;
