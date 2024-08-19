@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class LevelEndPowerup : MonoBehaviour
 {
-    private static int _powerupID = 4;
+    private static int _powerupID = 6;
 
     private void Start()
     {
