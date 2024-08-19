@@ -19,7 +19,7 @@ public class Tr01Enemy : MonoBehaviour
 
     private void Update()
     {
-        if (playerInDetectionZone && !PowerupManager.IsInvisibilityPowerupActivated)
+        if (playerInDetectionZone && CheckPlayerInvisibilityAndLifeStatus())
         {
             Transform playerTransform = PlayerTransformManager.Instance.playerTransform;
 
@@ -30,6 +30,11 @@ public class Tr01Enemy : MonoBehaviour
                 transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, _moveSpeed * Time.deltaTime);
             }
         }
+    }
+
+    private bool CheckPlayerInvisibilityAndLifeStatus()
+    {
+        return (!PowerupManager.IsInvisibilityPowerupActivated && PlayerController.playerLifeStatus == PlayerLifeStatus.ALIVE);
     }
 
     public static int GetEnemyID()
