@@ -98,6 +98,7 @@ public class PlayerController : MonoBehaviour
     {
         GameObject bullet = Instantiate(_bulletPrefab, _shootPoint.position, _shootPoint.rotation);
 
+        SoundManager.Instance.Play(Sounds.PLAYER_SHOT_LASER);
         PlayerBullet bulletComponent = bullet.GetComponent<PlayerBullet>();
         if (bulletComponent)
         {
