@@ -21,6 +21,7 @@ public class PlayerBullet : MonoBehaviour
         if (other.gameObject.GetComponent<Tr01Enemy>())
         {
             LevelManager.Instance.DestroyEnemy(Tr01Enemy.GetEnemyID());
+            SoundManager.Instance.Play(Sounds.EXPLOSION_SFX);
 
             Destroy(other.gameObject);
             Destroy(this.gameObject);
@@ -28,6 +29,7 @@ public class PlayerBullet : MonoBehaviour
         else if (other.gameObject.GetComponent<BlueTr01Enemy>())
         {
             LevelManager.Instance.DestroyEnemy(BlueTr01Enemy.GetEnemyID());
+            SoundManager.Instance.Play(Sounds.EXPLOSION_SFX);
 
             Destroy(other.gameObject);
             Destroy(this.gameObject);
@@ -36,6 +38,7 @@ public class PlayerBullet : MonoBehaviour
         {
             MagnetPowerup magnetPowerup = other.gameObject.GetComponent<MagnetPowerup>();
             LevelManager.Instance.CollectPowerup(magnetPowerup.GetPowerupID());
+            SoundManager.Instance.Play(Sounds.EXPLOSION_SFX);
 
             other.gameObject.SetActive(false);
             Destroy(this.gameObject);
@@ -43,6 +46,7 @@ public class PlayerBullet : MonoBehaviour
         else if (other.gameObject.GetComponent<LevelEndPowerup>())
         {
             LevelManager.Instance.CollectPowerup(LevelEndPowerup.GetPowerupID());
+            SoundManager.Instance.Play(Sounds.EXPLOSION_SFX);
 
             Destroy(other.gameObject);
             Destroy(this.gameObject);

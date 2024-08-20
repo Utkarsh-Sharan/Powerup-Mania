@@ -20,6 +20,7 @@ public class PlayerCollisionHandler : MonoBehaviour
             }
 
             rewindablePowerup.gameObject.SetActive(false);
+            SoundManager.Instance.Play(Sounds.PLAYER_COLLECTED_POWERUP);
         }
 
         if (other.GetComponent<TimeRewindPowerup>())
@@ -28,6 +29,7 @@ public class PlayerCollisionHandler : MonoBehaviour
 
             LevelManager.Instance.CollectPowerup(TimeRewindPowerup.GetPowerupID());
 
+            SoundManager.Instance.Play(Sounds.PLAYER_COLLECTED_POWERUP);
             Destroy(other.gameObject);
         }
         else if (other.GetComponent<PortalPowerup>())
@@ -37,18 +39,21 @@ public class PlayerCollisionHandler : MonoBehaviour
             LevelManager.Instance.CollectPowerup(PortalPowerup.GetPowerupID());
             LevelManager.playerLastPosition = this.transform.position;
 
+            SoundManager.Instance.Play(Sounds.PLAYER_COLLECTED_POWERUP);
             Destroy(other.gameObject);
         }
         else if (other.GetComponent<BackToLevel1Powerup>())
         {
             PowerupManager.IsBackToLevel1PowerupActivated = true;
 
+            SoundManager.Instance.Play(Sounds.PLAYER_COLLECTED_POWERUP);
             Destroy(other.gameObject);
         }
         else if (other.GetComponent<LevelEndPowerup>())
         {
             PowerupManager.IsLevelEndPowerupActivated = true;
 
+            SoundManager.Instance.Play(Sounds.PLAYER_COLLECTED_POWERUP);
             Destroy(other.gameObject);
         }
     }
@@ -60,14 +65,17 @@ public class PlayerCollisionHandler : MonoBehaviour
             PowerupManager.IsMagnetPowerupActivated = false;
 
             PlayerController.playerLifeStatus = PlayerLifeStatus.DEAD;
+            SoundManager.Instance.Play(Sounds.EXPLOSION_SFX);
         }
         else if (other.gameObject.GetComponent<Tr01Enemy>())
         {
             PlayerController.playerLifeStatus = PlayerLifeStatus.DEAD;
+            SoundManager.Instance.Play(Sounds.EXPLOSION_SFX);
         }
         else if (other.gameObject.GetComponent<BlueTr01Enemy>())
         {
             PlayerController.playerLifeStatus = PlayerLifeStatus.DEAD;
+            SoundManager.Instance.Play(Sounds.EXPLOSION_SFX);
 
             if (PowerupManager.IsInvisibilityPowerupActivated)
             {

@@ -40,7 +40,15 @@ public class SoundManager : MonoBehaviour
             _soundBgMusic.clip = clip;
             switch (sound)
             {
-                case Sounds.PLAYER_ABRUPT_LEVEL_END:
+                case Sounds.ABRUPT_GAME_END:
+                    _soundBgMusic.PlayOneShot(_soundBgMusic.clip);
+                    break;
+
+                case Sounds.GAME_OVER:
+                    _soundBgMusic.PlayOneShot(_soundBgMusic.clip);
+                    break;
+
+                case Sounds.GAME_WIN:
                     _soundBgMusic.PlayOneShot(_soundBgMusic.clip);
                     break;
 
@@ -96,5 +104,9 @@ public enum Sounds
 
     PLAYER_COLLECTED_POWERUP,
     PLAYER_SHOT_LASER,
-    PLAYER_ABRUPT_LEVEL_END
+    PLAYER_REWINDED_TIME,
+
+    ABRUPT_GAME_END,
+    GAME_OVER,
+    GAME_WIN
 }

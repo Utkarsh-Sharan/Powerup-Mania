@@ -74,6 +74,8 @@ public class PlayerPowerupEffectHandler : MonoBehaviour
         float startTime = Time.time;
         float elapsedTime = Time.time - startTime;
 
+        SoundManager.Instance.Play(Sounds.PLAYER_REWINDED_TIME);
+
         if(PlayerController.playerLifeStatus == PlayerLifeStatus.DEAD)
         {
             PlayerController.playerLifeStatus = PlayerLifeStatus.ALIVE;
@@ -110,8 +112,6 @@ public class PlayerPowerupEffectHandler : MonoBehaviour
         Color playerColor = _playerSpriteRenderer.color;
         playerColor.a = 0.3f;
         _playerSpriteRenderer.color = playerColor;
-
-        Debug.Log("PlayerColor: " + _playerSpriteRenderer.color.a);
 
         yield return new WaitForSeconds(_invisibilityDuration);
 
