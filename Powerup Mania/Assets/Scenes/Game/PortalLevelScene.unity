@@ -590,7 +590,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31a5a4b02b42b844ba50bea3347a9efe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _powerupID: 0
+  _powerupID: 8
 --- !u!212 &147364229
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2863,6 +2863,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da87a14aeee715c46847a0da18f2b881, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _powerupID: 7
 --- !u!212 &720071238
 SpriteRenderer:
   m_ObjectHideFlags: 0
