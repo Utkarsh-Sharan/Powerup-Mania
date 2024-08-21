@@ -8,7 +8,7 @@ public class PlayerBullet : MonoBehaviour
 
     void Start()
     {
-        Destroy(this.gameObject, 5f);
+        Destroy(this.gameObject, 1f);
     }
 
     void Update()
@@ -38,6 +38,14 @@ public class PlayerBullet : MonoBehaviour
         {
             MagnetPowerup magnetPowerup = other.gameObject.GetComponent<MagnetPowerup>();
             LevelManager.Instance.CollectPowerup(magnetPowerup.GetPowerupID());
+            SoundManager.Instance.Play(Sounds.EXPLOSION_SFX);
+
+            other.gameObject.SetActive(false);
+            Destroy(this.gameObject);
+        }else if (other.gameObject.GetComponent<InvisibilityPowerup>())
+        {
+            InvisibilityPowerup invisibilityPowerup = other.gameObject.GetComponent<InvisibilityPowerup>();
+            LevelManager.Instance.CollectPowerup(invisibilityPowerup.GetPowerupID());
             SoundManager.Instance.Play(Sounds.EXPLOSION_SFX);
 
             other.gameObject.SetActive(false);

@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
 
     //death countdown
     private Coroutine _deathCountdownCoroutine;
-    private float _countdownDuration = 10f;
+    private float _countdownDuration = 9f;
     private float _timeLeft;
 
     private void Start()
