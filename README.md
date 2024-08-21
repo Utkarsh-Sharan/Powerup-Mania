@@ -10,7 +10,7 @@ Movement: Control your character with the WASD keys.
 
 Shooting: Use the left mouse button to shoot and destroy powerups or enemies.
 
-3. Powerups
+2. Powerups
    
 Time Rewind: Rewind time by up to 10 seconds. Use it wisely! ⏳
 
@@ -22,7 +22,7 @@ Invisibility: Become invisible to avoid enemies and other dangers. 👻
 
 Unknown Powerup: Curious? Play the game to discover what this mysterious powerup does! 🔥
 
-5. Powerup Interactions
+3. Powerup Interactions
    
 Destroyable Powerups: Magnet, Invisibility, and the Unknown Powerup can be destroyed by shooting them with your bullets.
 
@@ -32,19 +32,19 @@ Destroyed powerups do not respawn if you rewind time.
 
 Collected powerups will reappear at their original location if you rewind time.
 
-7. Enemies
+4. Enemies
    
 T.R.-01: A relentless enemy that follows you when you come close and eliminates you on contact.
 
 Special T.R.-01: It can see you only when you're invisible.
 
-9. Game Over Logic
+5. Game Over Logic
     
 Win Condition: Reach the end of the level to win.
 
 Lose Condition: If you don't rewind time within 10 seconds of your death, the game is over, and you lose.
 
-11. Instruction Menu
+6. Instruction Menu
     
 A clear and concise instruction menu is available in the game, providing guidance on controls, powerups, and enemies. 
 
