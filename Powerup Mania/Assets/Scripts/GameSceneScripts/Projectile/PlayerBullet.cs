@@ -8,7 +8,7 @@ public class PlayerBullet : MonoBehaviour
 
     void Start()
     {
-        Destroy(this.gameObject, 5f);
+        Destroy(this.gameObject, 1f);
     }
 
     void Update()
