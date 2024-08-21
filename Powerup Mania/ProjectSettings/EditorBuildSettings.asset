@@ -20,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameOver/AbruptLevelEndScene.unity
     guid: 4b2a6ed72e7b7af4ebb3d9870632d99e
+  - enabled: 1
+    path: Assets/Scenes/GameOver/TimeRewindGameOverScene.unity
+    guid: 181d1745c08331a4496c0365ec726895
+  - enabled: 1
+    path: Assets/Scenes/GameOver/GameWinScene.unity
+    guid: 495de212b2a06ec468cdae602af2707d
   m_configObjects: {}

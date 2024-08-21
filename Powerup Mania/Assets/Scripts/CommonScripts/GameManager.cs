@@ -26,15 +26,17 @@ public class GameManager : MonoBehaviour
         switch(gameOverType)
         {
             case GameOverType.ABRUPT_GAME_OVER:
-                Debug.Log("Hi from abrupt");
+                LevelManager.Instance.ClearAllHashSets();
                 SceneManager.LoadScene(4);
                 break;
 
             case GameOverType.TIME_REWIND_GAME_OVER:
+                LevelManager.Instance.ClearAllHashSets();
                 SceneManager.LoadScene(5);
                 break;
 
             case GameOverType.GAME_WIN:
+                LevelManager.Instance.ClearAllHashSets();
                 SceneManager.LoadScene(6);
                 break;
         }

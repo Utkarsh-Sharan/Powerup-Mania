@@ -17,11 +17,13 @@ public class GameOver : MonoBehaviour
 
     private void LoadLevel1()
     {
+        SoundManager.Instance.Play(Sounds.BUTTON_CLICK);
         SceneManager.LoadScene(2);
     }
 
     private void GoToMenu()
     {
+        SoundManager.Instance.Play(Sounds.BUTTON_CLICK);
         SceneManager.LoadScene(0);
     }
 }

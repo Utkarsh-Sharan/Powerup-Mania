@@ -42,7 +42,6 @@ public class PlayerPowerupEffectHandler : MonoBehaviour
             _isCoroutineActive = true;
 
             PowerupManager.IsLevelEndPowerupActivated = false;
-            LevelManager.Instance.ClearAllHashSets();
             GameManager.Instance.LoadGameOverScene(GameOverType.ABRUPT_GAME_OVER);
         }
 
