@@ -30,7 +30,7 @@ public class LevelManager : MonoBehaviour
 
     public void LoadPortalLevelScene()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(3);
     }
 
     public void LoadLevel1Scene()
@@ -41,7 +41,7 @@ public class LevelManager : MonoBehaviour
     private IEnumerator WaitForSomeTimeThenLoadScene()
     {
         yield return new WaitForSeconds(0.1f);
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(2);
     }
 
     public void CollectPowerup(int powerupID)
