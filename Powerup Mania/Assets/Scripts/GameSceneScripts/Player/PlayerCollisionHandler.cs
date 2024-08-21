@@ -56,6 +56,10 @@ public class PlayerCollisionHandler : MonoBehaviour
             SoundManager.Instance.Play(Sounds.PLAYER_COLLECTED_POWERUP);
             Destroy(other.gameObject);
         }
+        else if (other.GetComponent<LevelWin>())
+        {
+            GameManager.Instance.LoadGameOverScene(GameOverType.GAME_WIN);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
