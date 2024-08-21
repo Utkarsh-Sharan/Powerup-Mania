@@ -52,6 +52,10 @@ public class SoundManager : MonoBehaviour
                     _soundBgMusic.PlayOneShot(_soundBgMusic.clip);
                     break;
 
+                case Sounds.HEART_BEAT:
+                    _soundBgMusic.Play();
+                    break;
+
                 case Sounds.BACKGROUND_MUSIC:
                     _soundBgMusic.Play();
                     break;
@@ -101,6 +105,7 @@ public enum Sounds
     BUTTON_CLICK,
 
     EXPLOSION_SFX,
+    HEART_BEAT,
 
     PLAYER_COLLECTED_POWERUP,
     PLAYER_SHOT_LASER,

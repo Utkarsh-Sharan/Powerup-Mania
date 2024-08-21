@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -21,6 +22,11 @@ public class PlayerController : MonoBehaviour
     private float _shootForce = 5f;
     private float _fireRate = 0.4f;
     private float _fireTime;
+
+    //death countdown
+    private Coroutine _deathCountdownCoroutine;
+    private float _countdownDuration = 10f;
+    private float _timeLeft;
 
     private void Start()
     {
@@ -57,15 +63,52 @@ public class PlayerController : MonoBehaviour
         if(playerLifeStatus == PlayerLifeStatus.ALIVE && !PowerupManager.IsInvisibilityPowerupActivated)
         {
             Color playerColor = _playerSpriteRenderer.color;
-            playerColor.a = 255;
+            playerColor.a = 1;
             _playerSpriteRenderer.color = playerColor;
+
+            // If player becomes ALIVE, stop the countdown and reset the timer
+            if (_deathCountdownCoroutine != null)
+            {
+                StopCoroutine(_deathCountdownCoroutine);
+                _deathCountdownCoroutine = null;
+
+                SoundManager.Instance.PlayMusic(Sounds.BACKGROUND_MUSIC);
+            }
         }
         else if(playerLifeStatus == PlayerLifeStatus.DEAD)
         {
             Color playerColor = _playerSpriteRenderer.color;
             playerColor.a = 0;
             _playerSpriteRenderer.color = playerColor;
+
+            // Start the countdown if it's not already running
+            if (_deathCountdownCoroutine == null)
+            {
+                SoundManager.Instance.PlayMusic(Sounds.HEART_BEAT);
+                _deathCountdownCoroutine = StartCoroutine(DeathCountdown());
+            }
         }
+    }
+
+    private IEnumerator DeathCountdown()
+    {
+        _timeLeft = _countdownDuration;
+
+        while (_timeLeft > 0)
+        {
+            yield return new WaitForSeconds(1f);
+            _timeLeft -= 1f;
+
+            // If player comes back to life during countdown, stop the Coroutine
+            if (playerLifeStatus == PlayerLifeStatus.ALIVE)
+            {
+                _deathCountdownCoroutine = null;
+                yield break;
+            }
+        }
+
+        GameManager.Instance.LoadGameOverScene(GameOverType.TIME_REWIND_GAME_OVER);
+        playerLifeStatus = PlayerLifeStatus.ALIVE;
     }
 
     private void HandleMovement()

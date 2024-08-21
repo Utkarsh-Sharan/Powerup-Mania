@@ -27,16 +27,19 @@ public class GameManager : MonoBehaviour
         {
             case GameOverType.ABRUPT_GAME_OVER:
                 LevelManager.Instance.ClearAllHashSets();
+                SoundManager.Instance.PlayMusic(Sounds.ABRUPT_GAME_END);
                 SceneManager.LoadScene(4);
                 break;
 
             case GameOverType.TIME_REWIND_GAME_OVER:
                 LevelManager.Instance.ClearAllHashSets();
+                SoundManager.Instance.PlayMusic(Sounds.GAME_OVER);
                 SceneManager.LoadScene(5);
                 break;
 
             case GameOverType.GAME_WIN:
                 LevelManager.Instance.ClearAllHashSets();
+                SoundManager.Instance.PlayMusic(Sounds.GAME_WIN);
                 SceneManager.LoadScene(6);
                 break;
         }
