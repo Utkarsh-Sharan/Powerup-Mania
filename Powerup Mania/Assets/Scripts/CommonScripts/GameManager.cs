@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
         switch(gameOverType)
         {
             case GameOverType.ABRUPT_GAME_OVER:
+                Debug.Log("Hi from abrupt");
                 SceneManager.LoadScene(4);
                 break;
 

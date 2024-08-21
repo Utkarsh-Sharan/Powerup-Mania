@@ -63,4 +63,10 @@ public class LevelManager : MonoBehaviour
     {
         return _destroyedEnemies.Contains(enemyID);
     }
+
+    public void ClearAllHashSets()
+    {
+        _destroyedEnemies.Clear();
+        _collectedPowerups.Clear();
+    }
 }

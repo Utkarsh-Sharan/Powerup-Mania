@@ -40,8 +40,10 @@ public class PlayerPowerupEffectHandler : MonoBehaviour
         if(!_isCoroutineActive && PowerupManager.IsLevelEndPowerupActivated)
         {
             _isCoroutineActive = true;
-            SceneManager.LoadScene(1);
+
             PowerupManager.IsLevelEndPowerupActivated = false;
+            LevelManager.Instance.ClearAllHashSets();
+            GameManager.Instance.LoadGameOverScene(GameOverType.ABRUPT_GAME_OVER);
         }
 
         if (PowerupManager.IsPortalPowerupActivated)
