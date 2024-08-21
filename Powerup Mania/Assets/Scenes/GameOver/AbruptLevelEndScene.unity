@@ -612,9 +612,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1205744262}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 448681fc0a16b6847978054fdb70a0bd, type: 3}
+  m_Script: {fileID: 11500000, guid: 0672df5484ad14645a4821f10993ff70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _restartButton: {fileID: 1562953367}
+  _menuButton: {fileID: 850900567}
 --- !u!1 &1408870105
 GameObject:
   m_ObjectHideFlags: 0
