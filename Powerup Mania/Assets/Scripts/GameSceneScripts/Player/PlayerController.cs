@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public static PlayerLifeStatus playerLifeStatus;
+    //private PlayerLifeStatus _playerLifeStatue;
    
     [SerializeField] private Camera _mainCamera;
     [SerializeField] private GameObject _bulletPrefab;

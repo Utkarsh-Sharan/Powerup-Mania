@@ -2,8 +2,8 @@ public class PlayerService
 {
     private PlayerController _playerController;
 
-    public PlayerService(PlayerController playerController)
+    public PlayerService(ReferenceScriptableObject playerReference)
     {
-        _playerController = playerController;
+        _playerController = playerReference.playerController;
     }
 }
