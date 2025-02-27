@@ -6,11 +6,13 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     public static PlayerLifeStatus playerLifeStatus;
-
+   
     [SerializeField] private Camera _mainCamera;
     [SerializeField] private GameObject _bulletPrefab;
     [SerializeField] private Transform _shootPoint;
     [SerializeField] private SpriteRenderer _playerSpriteRenderer;
+
+    private PlayerModel _playerModel;
 
     //player movement and input
     private float _playerSpeed = 10f;
@@ -30,6 +32,8 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        _playerModel = new PlayerModel();
+
         if (LevelManager.Instance.playerCameBackFromPortalLevel)
         {
             transform.position = LevelManager.playerLastPosition;
@@ -116,25 +120,12 @@ public class PlayerController : MonoBehaviour
         _horizontalInput = Input.GetAxisRaw("Horizontal");
         _verticalInput = Input.GetAxisRaw("Vertical");
         
-        Vector3 direction = new Vector3(_horizontalInput, _verticalInput, 0);
-
-        transform.position += direction * _playerSpeed * Time.deltaTime;
+        transform.position += _playerModel.HandleMovement(_horizontalInput, _verticalInput);
     }
 
     private void HandleRotation()
     {
-        // Getting mouse position in world coordinates
-        Vector3 mousePosition = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition.z = 0; // z-axis to be 0 for 2D
-
-        // Calculating direction and target rotation
-        Vector3 direction = (mousePosition - transform.position).normalized;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        angle -= 90;
-
-        // Smoothly rotating towards the target
-        Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _playerRotationSpeed * Time.deltaTime);
+        transform.rotation = _playerModel.HandleRotation(this.transform, _mainCamera);
     }
 
     private void Shoot()
