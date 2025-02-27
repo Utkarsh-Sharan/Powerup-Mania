@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,6 +5,11 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
     public static GameManager Instance { get { return _instance; } set { _instance = value; } }
+
+    [Header("Player Properties")]
+    [SerializeField] private PlayerController _playerController;
+
+    private PlayerService _playerService;
 
     private void Awake()
     {
@@ -19,6 +22,16 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void Start()
+    {
+        CreateServices();
+    }
+
+    private void CreateServices()
+    {
+        _playerService = new PlayerService(_playerController);
     }
 
     public void LoadGameOverScene(GameOverType gameOverType)

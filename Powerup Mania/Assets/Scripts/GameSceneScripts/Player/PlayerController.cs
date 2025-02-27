@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -14,25 +12,19 @@ public class PlayerController : MonoBehaviour
 
     private PlayerModel _playerModel;
 
-    //player movement and input
-    private float _playerSpeed = 10f;
-    private float _playerRotationSpeed = 5f;
     private float _horizontalInput;
     private float _verticalInput;
 
-    //player shoot
-    private float _shootForce = 5f;
     private float _fireRate = 0.4f;
     private float _fireTime;
 
-    //death countdown
-    private Coroutine _deathCountdownCoroutine;
     private float _countdownDuration = 9f;
     private float _timeLeft;
+    private Coroutine _deathCountdownCoroutine;
 
     private void Start()
     {
-        _playerModel = new PlayerModel();
+        _playerModel = new PlayerModel(_playerSpriteRenderer);
 
         if (LevelManager.Instance.playerCameBackFromPortalLevel)
         {
@@ -66,9 +58,7 @@ public class PlayerController : MonoBehaviour
     {
         if(playerLifeStatus == PlayerLifeStatus.ALIVE && !PowerupManager.IsInvisibilityPowerupActivated)
         {
-            Color playerColor = _playerSpriteRenderer.color;
-            playerColor.a = 1;
-            _playerSpriteRenderer.color = playerColor;
+            _playerModel.HandlePlayerAlpha(true);
 
             // If player becomes ALIVE, stop the countdown and reset the timer
             if (_deathCountdownCoroutine != null)
@@ -81,9 +71,7 @@ public class PlayerController : MonoBehaviour
         }
         else if(playerLifeStatus == PlayerLifeStatus.DEAD)
         {
-            Color playerColor = _playerSpriteRenderer.color;
-            playerColor.a = 0;
-            _playerSpriteRenderer.color = playerColor;
+            _playerModel.HandlePlayerAlpha(false);
 
             // Start the countdown if it's not already running
             if (_deathCountdownCoroutine == null)
@@ -131,22 +119,6 @@ public class PlayerController : MonoBehaviour
     private void Shoot()
     {
         GameObject bullet = Instantiate(_bulletPrefab, _shootPoint.position, _shootPoint.rotation);
-
         SoundManager.Instance.Play(Sounds.PLAYER_SHOT_LASER);
-        PlayerBullet bulletComponent = bullet.GetComponent<PlayerBullet>();
-        if (bulletComponent)
-        {
-            Rigidbody2D bulletRigidBody = bullet.GetComponent<Rigidbody2D>();
-            if (bulletRigidBody)
-            {
-                bulletRigidBody.velocity = _shootPoint.up * _shootForce;
-            }
-        }
     }
-}
-
-public enum PlayerLifeStatus
-{
-    ALIVE,
-    DEAD
 }

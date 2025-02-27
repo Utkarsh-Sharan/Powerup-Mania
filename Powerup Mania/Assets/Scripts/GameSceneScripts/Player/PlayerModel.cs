@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerModel
 {
+    private SpriteRenderer _playerSpriteRenderer;
+
     private float _playerSpeed = 10f;
     private float _playerRotationSpeed = 5f;
 
@@ -11,9 +13,10 @@ public class PlayerModel
     private float _fireRate = 0.4f;
     private float _fireTime;
 
-    private Coroutine _deathCountdownCoroutine;
-    private float _countdownDuration = 9f;
-    private float _timeLeft;
+    public PlayerModel(SpriteRenderer playerSpriteRenderer)
+    {
+        _playerSpriteRenderer = playerSpriteRenderer;
+    }
 
     public Vector3 HandleMovement(float horizontalInput, float verticalInput)
     {
@@ -33,5 +36,21 @@ public class PlayerModel
 
         Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
         return Quaternion.Slerp(playerTransform.rotation, targetRotation, _playerRotationSpeed * Time.deltaTime);
+    }
+
+    public void HandlePlayerAlpha(bool isPlayerAlive)
+    {
+        if(isPlayerAlive)
+        {
+            Color playerColor = _playerSpriteRenderer.color;
+            playerColor.a = 1;
+            _playerSpriteRenderer.color = playerColor;
+        }
+        else
+        {
+            Color playerColor = _playerSpriteRenderer.color;
+            playerColor.a = 0;
+            _playerSpriteRenderer.color = playerColor;
+        }
     }
 }
