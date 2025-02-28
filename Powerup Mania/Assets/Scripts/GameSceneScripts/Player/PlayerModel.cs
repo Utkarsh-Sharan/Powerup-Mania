@@ -6,12 +6,10 @@ public class PlayerModel
 {
     private SpriteRenderer _playerSpriteRenderer;
 
+    private PlayerLifeStatus _playerLifeStatus;
+
     private float _playerSpeed = 10f;
     private float _playerRotationSpeed = 5f;
-
-    private float _shootForce = 5f;
-    private float _fireRate = 0.4f;
-    private float _fireTime;
 
     public PlayerModel(SpriteRenderer playerSpriteRenderer)
     {
@@ -53,4 +51,8 @@ public class PlayerModel
             _playerSpriteRenderer.color = playerColor;
         }
     }
+
+    public PlayerLifeStatus GetPlayerLifeStatus() => _playerLifeStatus;
+
+    public void SetPlayerLifeStatus(PlayerLifeStatus status) => _playerLifeStatus = status;
 }

@@ -8,6 +8,7 @@ public class PlayerBullet : MonoBehaviour
 
     void Start()
     {
+        SoundManager.Instance.Play(Sounds.PLAYER_SHOT_LASER);
         Destroy(this.gameObject, 1f);
     }
 
@@ -42,7 +43,8 @@ public class PlayerBullet : MonoBehaviour
 
             other.gameObject.SetActive(false);
             Destroy(this.gameObject);
-        }else if (other.gameObject.GetComponent<InvisibilityPowerup>())
+        }
+        else if (other.gameObject.GetComponent<InvisibilityPowerup>())
         {
             InvisibilityPowerup invisibilityPowerup = other.gameObject.GetComponent<InvisibilityPowerup>();
             LevelManager.Instance.CollectPowerup(invisibilityPowerup.GetPowerupID());

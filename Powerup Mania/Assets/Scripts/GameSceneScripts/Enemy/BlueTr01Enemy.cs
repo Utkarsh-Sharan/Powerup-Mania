@@ -34,7 +34,7 @@ public class BlueTr01Enemy : MonoBehaviour
 
     private bool CheckPlayerInvisibilityAndLifeStatus()
     {
-        return (PowerupManager.IsInvisibilityPowerupActivated && PlayerController.playerLifeStatus == PlayerLifeStatus.ALIVE);
+        return (PowerupManager.IsInvisibilityPowerupActivated && GameManager.Instance.GetPlayerService().GetPlayerLifeStatus() == PlayerLifeStatus.ALIVE);
     }
 
     public static int GetEnemyID()

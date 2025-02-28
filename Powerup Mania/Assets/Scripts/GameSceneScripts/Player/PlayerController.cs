@@ -3,8 +3,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public static PlayerLifeStatus playerLifeStatus;
-    //private PlayerLifeStatus _playerLifeStatue;
+    public static PlayerLifeStatus playerLifeStatus { get; set; }
    
     [SerializeField] private Camera _mainCamera;
     [SerializeField] private GameObject _bulletPrefab;
@@ -112,14 +111,11 @@ public class PlayerController : MonoBehaviour
         transform.position += _playerModel.HandleMovement(_horizontalInput, _verticalInput);
     }
 
-    private void HandleRotation()
-    {
-        transform.rotation = _playerModel.HandleRotation(this.transform, _mainCamera);
-    }
+    private void HandleRotation() => transform.rotation = _playerModel.HandleRotation(this.transform, _mainCamera);
 
-    private void Shoot()
-    {
-        GameObject bullet = Instantiate(_bulletPrefab, _shootPoint.position, _shootPoint.rotation);
-        SoundManager.Instance.Play(Sounds.PLAYER_SHOT_LASER);
-    }
+    private void Shoot() => Instantiate(_bulletPrefab, _shootPoint.position, _shootPoint.rotation);
+
+    public PlayerLifeStatus GetPlayerLifeStatus() => _playerModel.GetPlayerLifeStatus();
+
+    public void SetPlayerLifeStatus(PlayerLifeStatus status) => _playerModel.SetPlayerLifeStatus(status);
 }
