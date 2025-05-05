@@ -1,43 +1,40 @@
 using System.Collections;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController
 {
     public static PlayerLifeStatus playerLifeStatus { get; set; }
+    public PlayerLifeStatus PlayerLifeStatus { get; set; }
    
     [SerializeField] private Camera _mainCamera;
     [SerializeField] private GameObject _bulletPrefab;
     [SerializeField] private Transform _shootPoint;
     [SerializeField] private SpriteRenderer _playerSpriteRenderer;
 
-    private PlayerModel _playerModel;
+    private PlayerView _playerView;
 
-    private float _horizontalInput;
-    private float _verticalInput;
+    private float _fireRate;
+    private float _playerSpeed;
+    private float _playerRotationSpeed;
+    private float _countdownDuration;
 
-    private float _fireRate = 0.4f;
     private float _fireTime;
 
-    private float _countdownDuration = 9f;
     private float _timeLeft;
     private Coroutine _deathCountdownCoroutine;
 
-    private void Start()
+    public PlayerController(PlayerScriptableObject playerSO, PlayerView playerView)
     {
-        _playerModel = new PlayerModel(_playerSpriteRenderer);
+        _fireRate = playerSO.FireRate;
+        _playerSpeed = playerSO.PlayerSpeed;
+        _playerRotationSpeed = playerSO.PlayerRotationSpeed;
+        _countdownDuration = playerSO.CountdownDuration;
 
-        if (LevelManager.Instance.playerCameBackFromPortalLevel)
-        {
-            transform.position = LevelManager.playerLastPosition;
-            LevelManager.Instance.playerCameBackFromPortalLevel = false;
-        }
-        else
-        {
-            transform.position = Vector3.zero;
-        }
+        _playerView = Object.Instantiate(playerView);
+        _playerView.Initialize(this);
     }
 
-    private void Update()
+    public void UpdatePlayer()
     {
         HandlePlayerLifestatus();
 
@@ -58,64 +55,51 @@ public class PlayerController : MonoBehaviour
     {
         if(playerLifeStatus == PlayerLifeStatus.ALIVE && !PowerupManager.IsInvisibilityPowerupActivated)
         {
-            _playerModel.HandlePlayerAlpha(true);
+            _playerView.HandlePlayerAlpha(true);
 
             // If player becomes ALIVE, stop the countdown and reset the timer
             if (_deathCountdownCoroutine != null)
             {
-                StopCoroutine(_deathCountdownCoroutine);
-                _deathCountdownCoroutine = null;
-
+                _playerView.StopDeathCountdownRoutine();
                 SoundManager.Instance.PlayMusic(Sounds.BACKGROUND_MUSIC);
             }
         }
         else if(playerLifeStatus == PlayerLifeStatus.DEAD)
         {
-            _playerModel.HandlePlayerAlpha(false);
+            _playerView.HandlePlayerAlpha(false);
 
             // Start the countdown if it's not already running
             if (_deathCountdownCoroutine == null)
             {
                 SoundManager.Instance.PlayMusic(Sounds.HEART_BEAT);
-                _deathCountdownCoroutine = StartCoroutine(DeathCountdown());
+                _deathCountdownCoroutine = _playerView.StartDeathCountdownRoutine(_countdownDuration);
             }
         }
-    }
-
-    private IEnumerator DeathCountdown()
-    {
-        _timeLeft = _countdownDuration;
-
-        while (_timeLeft > 0)
-        {
-            yield return new WaitForSeconds(1f);
-            _timeLeft -= 1f;
-
-            // If player comes back to life during countdown, stop the Coroutine
-            if (playerLifeStatus == PlayerLifeStatus.ALIVE)
-            {
-                _deathCountdownCoroutine = null;
-                yield break;
-            }
-        }
-
-        GameManager.Instance.LoadGameOverScene(GameOverType.TIME_REWIND_GAME_OVER);
-        playerLifeStatus = PlayerLifeStatus.ALIVE;
     }
 
     private void HandleMovement()
     {
-        _horizontalInput = Input.GetAxisRaw("Horizontal");
-        _verticalInput = Input.GetAxisRaw("Vertical");
-        
-        transform.position += _playerModel.HandleMovement(_horizontalInput, _verticalInput);
+        float horizontalInput = Input.GetAxisRaw("Horizontal");
+        float verticalInput = Input.GetAxisRaw("Vertical");
+
+        Vector3 direction = new Vector3(horizontalInput, verticalInput, 0);
+
+        _playerView.GetPlayerTransform().position += direction * _playerSpeed * Time.deltaTime;
     }
 
-    private void HandleRotation() => transform.rotation = _playerModel.HandleRotation(this.transform, _mainCamera);
+    private void HandleRotation()
+    {
+        Vector3 mousePosition = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = 0;
 
-    private void Shoot() => Instantiate(_bulletPrefab, _shootPoint.position, _shootPoint.rotation);
+        Vector3 direction = (mousePosition - _playerView.GetPlayerTransform().position).normalized;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        angle -= 90;
 
-    public PlayerLifeStatus GetPlayerLifeStatus() => _playerModel.GetPlayerLifeStatus();
+        Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
-    public void SetPlayerLifeStatus(PlayerLifeStatus status) => _playerModel.SetPlayerLifeStatus(status);
+        _playerView.GetPlayerTransform().rotation = Quaternion.Slerp(_playerView.GetPlayerTransform().rotation, targetRotation, _playerRotationSpeed * Time.deltaTime);
+    }
+
+    private void Shoot() => Object.Instantiate(_bulletPrefab, _shootPoint.position, _shootPoint.rotation);
 }

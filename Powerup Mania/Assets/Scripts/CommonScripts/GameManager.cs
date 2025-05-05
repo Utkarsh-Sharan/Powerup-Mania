@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 
     [Header("Player Properties")]
     [SerializeField] private ReferenceScriptableObject _playerReference;
+    [SerializeField] private PlayerScriptableObject _playerSO;
+    [SerializeField] private PlayerView _playerView;
 
     private PlayerService _playerService;
 
@@ -31,7 +33,7 @@ public class GameManager : MonoBehaviour
 
     private void CreateServices()
     {
-        _playerService = new PlayerService(_playerReference);
+        _playerService = new PlayerService(_playerSO, _playerView);
     }
 
     public void LoadGameOverScene(GameOverType gameOverType)

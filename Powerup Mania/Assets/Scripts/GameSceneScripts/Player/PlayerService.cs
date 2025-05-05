@@ -2,12 +2,8 @@ public class PlayerService
 {
     private PlayerController _playerController;
 
-    public PlayerService(ReferenceScriptableObject playerReference)
+    public PlayerService(PlayerScriptableObject playerSO, PlayerView playerView)
     {
-        _playerController = playerReference.playerController;
+        _playerController = new PlayerController(playerSO, playerView);
     }
-
-    public PlayerLifeStatus GetPlayerLifeStatus() => _playerController.GetPlayerLifeStatus();
-
-    public void SetPlayerLifeStatus(PlayerLifeStatus status) => _playerController.SetPlayerLifeStatus(status);
 }

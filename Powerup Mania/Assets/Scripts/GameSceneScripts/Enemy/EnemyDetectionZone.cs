@@ -6,7 +6,7 @@ public class EnemyDetectionZone : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.GetComponent<PlayerController>())
+        if (other.gameObject.GetComponent<PlayerView>())
         {
             Tr01Enemy.playerInDetectionZone = true;
             BlueTr01Enemy.playerInDetectionZone = true;
@@ -15,7 +15,7 @@ public class EnemyDetectionZone : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.GetComponent<PlayerController>())
+        if (other.gameObject.GetComponent<PlayerView>())
         {
             Tr01Enemy.playerInDetectionZone = false;
             BlueTr01Enemy.playerInDetectionZone = false;

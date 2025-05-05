@@ -845,16 +845,51 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 935081365693250548, guid: 2e02f030b6168124bbf60d4a8c026dbf, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4563418582798219367, guid: 2e02f030b6168124bbf60d4a8c026dbf, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 66020923}
   m_SourcePrefab: {fileID: 100100000, guid: 2e02f030b6168124bbf60d4a8c026dbf, type: 3}
 --- !u!4 &66020919 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6079452205325660861, guid: 2e02f030b6168124bbf60d4a8c026dbf, type: 3}
   m_PrefabInstance: {fileID: 66020918}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &66020920 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5304144048597122471, guid: 2e02f030b6168124bbf60d4a8c026dbf, type: 3}
+  m_PrefabInstance: {fileID: 66020918}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &66020921 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 2054032829048170894, guid: 2e02f030b6168124bbf60d4a8c026dbf, type: 3}
+  m_PrefabInstance: {fileID: 66020918}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &66020922 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4563418582798219367, guid: 2e02f030b6168124bbf60d4a8c026dbf, type: 3}
+  m_PrefabInstance: {fileID: 66020918}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &66020923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 66020922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ec33579b89e83c4ea065252d780cc5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mainCamera: {fileID: 380630848}
+  _bulletPrefab: {fileID: 8461847994613328692, guid: 89607639884193d41a1585a7b93c41dd, type: 3}
+  _shootPoint: {fileID: 66020920}
+  _playerSpriteRenderer: {fileID: 66020921}
 --- !u!1001 &69480302
 PrefabInstance:
   m_ObjectHideFlags: 0
