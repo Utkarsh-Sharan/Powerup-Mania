@@ -51,7 +51,7 @@ public class LevelManager : MonoBehaviour
 
     public bool IsPowerupCollected(int powerupID)
     {
-        return _collectedPowerups.Contains(powerupID);  //very efficient as this takes O(1) time, that's why used hash set
+        return _collectedPowerups.Contains(powerupID);
     }
 
     public void DestroyEnemy(int enemyID)

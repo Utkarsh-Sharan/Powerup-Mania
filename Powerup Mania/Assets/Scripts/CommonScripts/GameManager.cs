@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get { return _instance; } set { _instance = value; } }
 
     [Header("Player Properties")]
-    [SerializeField] private ReferenceScriptableObject _playerReference;
     [SerializeField] private PlayerScriptableObject _playerSO;
     [SerializeField] private PlayerView _playerView;
 
