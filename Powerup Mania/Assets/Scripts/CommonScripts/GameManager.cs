@@ -7,9 +7,13 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get { return _instance; } set { _instance = value; } }
 
     [Header("Player Properties")]
-    [SerializeField] private PlayerScriptableObject _playerSO;
     [SerializeField] private PlayerView _playerView;
 
+    [Header("Scriptable Objects")]
+    [SerializeField] private PlayerScriptableObject _playerSO;
+    [SerializeField] private LevelScriptableObject _levelSO;
+
+    private LevelService _levelService;
     private PlayerService _playerService;
 
     private void Awake()
@@ -32,6 +36,7 @@ public class GameManager : MonoBehaviour
 
     private void CreateServices()
     {
+        _levelService = new LevelService(_levelSO);
         _playerService = new PlayerService(_playerSO, _playerView);
     }
 

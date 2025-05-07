@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70a5878908fed8243ac34381a9eb7cab, type: 3}
+  m_Name: LevelScriptableObject
+  m_EditorClassIdentifier: 
+  LevelData:
+  - LevelName: 0
+    Powerups:
+    - PowerupType: 0
+      PowerupView: {fileID: 0}
+      NumbersToSpawn: 1
+      IDAndSpawnPositions:
+      - PowerupID: 1
+        Position: {x: 0, y: 4, z: 0}
+    - PowerupType: 3
+      PowerupView: {fileID: 0}
+      NumbersToSpawn: 3
+      IDAndSpawnPositions:
+      - PowerupID: 2
+        Position: {x: 14.28, y: 6.11, z: 0}
+      - PowerupID: 3
+        Position: {x: -10, y: 20, z: 0}
+      - PowerupID: 4
+        Position: {x: -1, y: 39, z: 0}
+    - PowerupType: 4
+      PowerupView: {fileID: 0}
+      NumbersToSpawn: 1
+      IDAndSpawnPositions:
+      - PowerupID: 5
+        Position: {x: 19, y: 28, z: 0}
+    - PowerupType: 2
+      PowerupView: {fileID: 0}
+      NumbersToSpawn: 6
+      IDAndSpawnPositions:
+      - PowerupID: 5
+        Position: {x: 17, y: 39, z: 0}
