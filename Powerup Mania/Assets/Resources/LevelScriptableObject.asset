@@ -43,3 +43,25 @@ MonoBehaviour:
       IDAndSpawnPositions:
       - PowerupID: 5
         Position: {x: 17, y: 39, z: 0}
+  - LevelName: 1
+    Powerups:
+    - PowerupType: 1
+      PowerupView: {fileID: 0}
+      NumbersToSpawn: 2
+      IDAndSpawnPositions:
+      - PowerupID: 7
+        Position: {x: -15.32, y: 2, z: 0}
+      - PowerupID: 8
+        Position: {x: -34, y: 8, z: 0}
+    - PowerupType: 3
+      PowerupView: {fileID: 0}
+      NumbersToSpawn: 1
+      IDAndSpawnPositions:
+      - PowerupID: 9
+        Position: {x: -16, y: 17, z: 0}
+    - PowerupType: 5
+      PowerupView: {fileID: 0}
+      NumbersToSpawn: 1
+      IDAndSpawnPositions:
+      - PowerupID: 10
+        Position: {x: -15, y: 24, z: 0}

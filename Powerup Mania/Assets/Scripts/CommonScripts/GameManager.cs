@@ -1,11 +1,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager : GenericMonoSingleton<GameManager>
 {
-    private static GameManager _instance;
-    public static GameManager Instance { get { return _instance; } set { _instance = value; } }
-
     [Header("Player Properties")]
     [SerializeField] private PlayerView _playerView;
 
@@ -16,21 +13,10 @@ public class GameManager : MonoBehaviour
     private LevelService _levelService;
     private PlayerService _playerService;
 
-    private void Awake()
+    protected override void Awake()
     {
-        if(_instance == null)
-        {
-            _instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
+        base.Awake();
 
-    private void Start()
-    {
         CreateServices();
     }
 
@@ -42,22 +28,21 @@ public class GameManager : MonoBehaviour
 
     public void LoadGameOverScene(GameOverType gameOverType)
     {
-        switch(gameOverType)
+        LevelManager.Instance.ClearAllHashSets();
+
+        switch (gameOverType)
         {
             case GameOverType.ABRUPT_GAME_OVER:
-                LevelManager.Instance.ClearAllHashSets();
                 SoundManager.Instance.PlayMusic(Sounds.ABRUPT_GAME_END);
                 SceneManager.LoadScene(4);
                 break;
 
             case GameOverType.TIME_REWIND_GAME_OVER:
-                LevelManager.Instance.ClearAllHashSets();
                 SoundManager.Instance.PlayMusic(Sounds.GAME_OVER);
                 SceneManager.LoadScene(5);
                 break;
 
             case GameOverType.GAME_WIN:
-                LevelManager.Instance.ClearAllHashSets();
                 SoundManager.Instance.PlayMusic(Sounds.GAME_WIN);
                 SceneManager.LoadScene(6);
                 break;
