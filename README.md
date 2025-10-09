@@ -2,6 +2,10 @@
 
 Welcome to Powerup Mania, a thrilling 2D game developed in Unity that challenges your strategy, reflexes, and adaptability! Dive into a world filled with unique powerups, cunning enemies, and engaging gameplay.
 
+## ⚠️ **Archived Project Notice**  
+This Unity project is no longer maintained and may contain unpatched binaries affected by CVE-2025-59489.  
+Please do not use or distribute without applying Unity’s official security patch.
+
 Game Features
 
 1. Player Controls
@@ -48,6 +52,6 @@ Lose Condition: If you don't rewind time within 10 seconds of your death, the ga
     
 A clear and concise instruction menu is available in the game, providing guidance on controls, powerups, and enemies. 
 
-PLayable link- https://quirexo.itch.io/powerup-mania
+---
 
 Watch here- https://www.loom.com/share/98ddc79412be42c7924df3f3f6ad4e59?sid=6cd46bf4-ef7f-47c7-919a-cecdecd56619
